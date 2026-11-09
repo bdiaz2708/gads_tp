@@ -2,43 +2,511 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CoffeLink</title>
+<title>CoffeLink</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E☕%3C/text%3E%3C/svg%3E">
 <style>
 :root{--bg:#f6f3ef;--panel:#fff;--ink:#211a17;--muted:#756b65;--line:#e7dfd8;--brand:#6f4e37;--brand2:#b9855b;--ok:#2f7d57;--bad:#b84b4b;--warn:#b7791f;--shadow:0 12px 32px rgba(53,38,29,.08)}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{background:#241a15;color:#fff;padding:24px 18px;position:sticky;top:0;height:100vh}.brand{display:flex;gap:12px;align-items:center;margin:0 8px 30px}.bean{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,#d7a77f,#8b5d3b);display:grid;place-items:center;font-size:22px}.brand b{font-size:19px}.brand small{display:block;color:#cbbdb5}.nav button{width:100%;border:0;background:transparent;color:#d9cec7;padding:12px 14px;border-radius:12px;text-align:left;margin:3px 0;cursor:pointer}.nav button:hover,.nav button.active{background:#3b2b23;color:#fff}.sidefoot{position:absolute;bottom:20px;left:18px;right:18px;padding:14px;background:#30231d;border-radius:14px;font-size:13px;color:#d9cec7}.main{padding:28px 34px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:24px}.top h1{margin:0;font-size:28px}.top p{margin:5px 0 0;color:var(--muted)}.actions{display:flex;gap:10px;align-items:center}.btn{border:0;border-radius:11px;padding:10px 14px;cursor:pointer;background:#eee7e1;color:var(--ink)}.btn.primary{background:var(--brand);color:#fff}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}.kpi small{color:var(--muted)}.kpi strong{display:block;font-size:28px;margin:8px 0}.kpi span{font-size:12px;color:var(--ok)}.section{margin-top:20px}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.sectionhead h2{font-size:18px;margin:0}.two{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.stage{background:#faf8f6;border:1px solid var(--line);border-radius:14px;padding:12px;min-height:145px}.stage h4{font-size:12px;margin:0 0 10px;color:var(--muted)}.deal{background:#fff;border:1px solid var(--line);border-radius:11px;padding:10px;margin:8px 0;font-size:12px}.deal b{display:block;font-size:13px;margin-bottom:4px}.progress{height:7px;background:#eee8e3;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;background:var(--brand2);border-radius:20px}.list{width:100%;border-collapse:collapse}.list th,.list td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:13px}.list th{color:var(--muted);font-weight:600}.badge{padding:5px 8px;border-radius:20px;background:#eee8e3;font-size:11px;white-space:nowrap}.badge.ok{background:#e6f4ec;color:#22613f}.badge.bad{background:#fae9e9;color:#8c3434}.activity{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}.dot{width:9px;height:9px;background:var(--brand2);border-radius:50%;margin-top:6px}.activity p{margin:0;font-size:13px}.activity small{color:var(--muted)}.view{display:none}.view.active{display:block}.toolbar{display:flex;gap:10px;margin-bottom:14px}.toolbar input,.toolbar select{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:180px}.kanban{display:grid;grid-template-columns:repeat(6,minmax(190px,1fr));gap:12px;overflow:auto;padding-bottom:10px}.kanban .stage{min-height:400px}.modal{position:fixed;inset:0;background:#0008;display:none;place-items:center;padding:20px;z-index:20}.modal.open{display:grid}.dialog{width:min(650px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:20px;padding:22px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:10px;padding:10px}.empty{padding:30px;text-align:center;color:var(--muted)}@media(max-width:980px){.app{grid-template-columns:78px 1fr}.brand div,.nav span,.sidefoot{display:none}.brand{margin-left:0}.nav button{text-align:center}.grid{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}.pipeline{grid-template-columns:repeat(2,1fr)}}@media(max-width:640px){.app{display:block}.side{height:auto;position:static;padding:10px;display:flex;align-items:center;overflow:auto}.brand{margin:0 10px 0 0}.nav{display:flex}.nav button{width:auto;white-space:nowrap}.main{padding:18px}.top{align-items:flex-start;flex-direction:column}.grid{grid-template-columns:1fr}.pipeline{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.actions{width:100%;justify-content:space-between}}
 .login{display:none;min-height:100vh;grid-template-columns:1fr 1fr}body:not(.in) .login{display:grid}body:not(.in) .app{display:none}.lhero{background:#241a15;color:#fff;padding:48px;display:flex;flex-direction:column;justify-content:center;gap:16px}.lhero .bean{width:64px;height:64px;font-size:34px;border-radius:20px}.lhero h2{margin:0;font-size:34px}.lhero p{margin:0;color:#cbbdb5;max-width:340px;line-height:1.5}.lform{display:grid;place-items:center;padding:24px}.lform form{width:min(400px,100%);display:flex;flex-direction:column;gap:14px;padding:26px}.lform h1{margin:0;font-size:26px}.lform .sub{margin:0;color:var(--muted)}.lerr{color:var(--bad);font-size:13px;min-height:18px}.hint{font-size:12px;color:var(--muted);background:#faf8f6;border:1px solid var(--line);border-radius:10px;padding:10px 12px;line-height:1.6}.who{padding:9px 12px;border-radius:11px;background:#fff;border:1px solid var(--line);font-size:13px;font-weight:600}.actions{flex-wrap:wrap}.main{min-width:0}.deal select{display:block;width:100%;margin-top:6px}@media(max-width:760px){.login{grid-template-columns:1fr}.lhero{padding:28px 24px}.lhero h2{font-size:26px}}
+.toolbar.wrap{flex-wrap:wrap}.toolbar select{min-width:150px}.tight{padding:6px 10px}tr.click{cursor:pointer}tr.click:hover td{background:#faf8f6}
+.pager{display:flex;justify-content:space-between;align-items:center;padding:10px 6px 4px;font-size:13px;color:var(--muted);gap:10px;flex-wrap:wrap}.pager div{display:flex;gap:8px;align-items:center}
+.btn.sm{padding:6px 10px;font-size:12px}.btn:disabled{opacity:.45;cursor:default}.btn.danger{background:#fae9e9;color:#8c3434}.btn.okb{background:#e6f4ec;color:#22613f}
+.badge.warn{background:#fdf1dc;color:#7a520f}.muted{color:var(--muted)}a{color:var(--brand)}
+.dl{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 20px;margin:6px 0 0}.dl div small{display:block;color:var(--muted);font-size:12px;margin-bottom:2px}.dl div{font-size:14px;overflow-wrap:anywhere}
+.headcard{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}.headcard h2{margin:0 0 4px}.btns{display:flex;gap:8px;flex-wrap:wrap}
+.tl{position:relative;margin:4px 0 0;padding-left:4px}.tli{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.tli:last-child{border-bottom:0}.tli .ic{flex:0 0 30px;height:30px;border-radius:10px;display:grid;place-items:center;background:#f3ebe4;font-size:14px}.tli.stg .ic{background:#e9eef7}.tli p{margin:0;font-size:13px}.tli small{color:var(--muted);font-size:12px}.tli .res{margin-top:4px;font-size:13px}
+.kanban{grid-template-columns:repeat(var(--n),minmax(200px,1fr))}.kanban .stage h4{display:flex;justify-content:space-between}.kanban .stage.over{outline:2px dashed var(--brand2);background:#fbf3ea}.deal[draggable=true]{cursor:grab}.deal:hover{border-color:var(--brand2)}.deal .meta{color:var(--muted);margin-top:4px}
+.stage.won h4{color:var(--ok)}.stage.lost h4{color:var(--bad)}
+.ferr{color:var(--bad);font-size:13px;min-height:16px}.help{font-size:12px;color:var(--muted)}.field.check{flex-direction:row;align-items:center;gap:8px}.field.check input{width:18px;height:18px}.notebox{grid-column:1/-1;background:#faf8f6;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--muted)}
+.toast{position:fixed;right:20px;bottom:20px;background:#241a15;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);z-index:40;max-width:420px;font-size:14px;display:none}.toast.bad{background:#8c3434}.toast.show{display:block}
+.rolecards{grid-template-columns:repeat(3,1fr)}.rolecards p{font-size:13px;color:var(--muted);line-height:1.5;margin:6px 0 0}.cfg{display:grid;grid-template-columns:1fr 1fr;gap:16px}.cfg .card:first-child{grid-column:1/-1}
+.summary{font-size:13px;background:#faf8f6;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px;line-height:1.6}
+@media(max-width:980px){.dl{grid-template-columns:1fr 1fr}.rolecards,.cfg{grid-template-columns:1fr}.cfg .card:first-child{grid-column:auto}}
 </style>
-</head><body><div class="login" id="loginBox"><div class="lhero"><div class="bean">☕</div><h2>CoffeLink</h2><p>Seguimiento de cafeterías, oportunidades y actividad comercial.</p></div><div class="lform"><form id="loginForm" class="card" onsubmit="doLogin(event)"><h1>Iniciar sesión</h1><p class="sub">Ingresá con tu usuario para continuar.</p><label class="field"><span>Usuario</span><input id="lu" autocomplete="username" autofocus required></label><label class="field"><span>Contraseña</span><input id="lp" type="password" autocomplete="current-password" required></label><div class="lerr" id="lerr"></div><button class="btn primary" type="submit">Ingresar</button><div class="hint">Demo · usuarios: <b>admin</b>, <b>vendedor</b>, <b>comercial</b><br>Contraseña: <b>12345</b></div></form></div></div><div class="app">
-<aside class="side"><div class="brand"><div class="bean">☕</div><div><b>CoffeLink</b></div></div><nav class="nav" id="nav"></nav><div class="sidefoot">Sesión demo<br><b id="roleText">Responsable comercial</b></div></aside>
-<main class="main"><header class="top"><div><h1 id="title">Panel comercial</h1><p id="subtitle">Seguimiento de cafeterías, oportunidades y actividad comercial.</p></div><div class="actions"><span class="who" id="userName"></span><button class="btn" onclick="logout()">Salir</button><button class="btn primary" onclick="openModal('opportunity')">+ Nueva oportunidad</button></div></header>
-<section id="dashboard" class="view active"></section><section id="clients" class="view"></section><section id="contacts" class="view"></section><section id="opportunities" class="view"></section><section id="activities" class="view"></section><section id="products" class="view"></section><section id="users" class="view"></section>
+</head><body>
+<div class="login" id="loginBox"><div class="lhero"><div class="bean">☕</div><h2>CoffeLink</h2><p>CRM para distribución de café a cafeterías: clientes, degustaciones, oportunidades e historial comercial.</p></div><div class="lform"><form id="loginForm" class="card" onsubmit="doLogin(event)"><h1>Iniciar sesión</h1><p class="sub">Ingresá con tu usuario para continuar.</p><label class="field"><span>Usuario</span><input id="lu" autocomplete="username" autofocus required></label><label class="field"><span>Contraseña</span><input id="lp" type="password" autocomplete="current-password" required></label><div class="lerr" id="lerr"></div><button class="btn primary" type="submit">Ingresar</button><div class="hint">Demo · usuarios: <b>admin</b> (Administrador), <b>comercial</b> (Responsable comercial), <b>vendedor</b> y <b>martin</b> (Vendedores)<br>Contraseña: <b>12345</b></div></form></div></div>
+<div class="app">
+<aside class="side"><div class="brand"><div class="bean">☕</div><div><b>CoffeLink</b><small>CRM cafetero</small></div></div><nav class="nav" id="nav"></nav><div class="sidefoot">Sesión iniciada<br><b id="roleText"></b></div></aside>
+<main class="main"><header class="top"><div><h1 id="title"></h1><p id="subtitle"></p></div><div class="actions"><span class="who" id="userName"></span><button class="btn" onclick="logout()">Salir</button><button class="btn primary" onclick="oppForm()">+ Nueva oportunidad</button></div></header>
+<section id="view"></section>
 </main></div>
-<div class="modal" id="modal"><div class="dialog"><div class="sectionhead"><h2 id="modalTitle">Nuevo registro</h2><button class="btn" onclick="closeModal()">✕</button></div><form id="form" class="formgrid"></form></div></div>
+<div class="modal" id="modal"><div class="dialog"><div class="sectionhead"><h2 id="modalTitle"></h2><button class="btn" type="button" onclick="closeModal()">✕</button></div><form id="form" class="formgrid" novalidate></form></div></div>
+<div class="toast" id="toast"></div>
 <script>
-const seed={clients:[{id:1,name:'Café del Centro',city:'San Justo',branches:2,consumption:65,status:'Activo',owner:'Lucía Fernández'},{id:2,name:'Origen Café',city:'Ramos Mejía',branches:1,consumption:35,status:'Potencial',owner:'Martín López'},{id:3,name:'La Esquina Coffee',city:'Morón',branches:3,consumption:110,status:'Activo',owner:'Lucía Fernández'},{id:4,name:'Tostado Sur',city:'Lomas del Mirador',branches:1,consumption:25,status:'Inactivo',owner:'Martín López'}],contacts:[{id:1,client:'Café del Centro',name:'Sofía Gómez',role:'Encargada',phone:'11 5555-1200',email:'sofia@cafecentro.demo'},{id:2,client:'Origen Café',name:'Nicolás Ruiz',role:'Dueño',phone:'11 5555-3400',email:'nicolas@origen.demo'},{id:3,client:'La Esquina Coffee',name:'Carla Méndez',role:'Compras',phone:'11 5555-9800',email:'carla@esquina.demo'}],products:[{id:1,name:'Blend Clásico',format:'1 kg',type:'Café en grano'},{id:2,name:'Colombia Premium',format:'500 g',type:'Especialidad'},{id:3,name:'Brasil Santos',format:'1 kg',type:'Café en grano'},{id:4,name:'Descafeinado',format:'500 g',type:'Café en grano'}],opps:[{id:1,client:'Café del Centro',product:'Colombia Premium',stage:'Negociación',value:480000,owner:'Lucía Fernández',next:'Revisar volumen mensual'},{id:2,client:'Origen Café',product:'Blend Clásico',stage:'Degustación',value:210000,owner:'Martín López',next:'Coordinar prueba de producto'},{id:3,client:'La Esquina Coffee',product:'Brasil Santos',stage:'Propuesta',value:690000,owner:'Lucía Fernández',next:'Enviar propuesta actualizada'},{id:4,client:'Tostado Sur',product:'Blend Clásico',stage:'Perdida',value:160000,owner:'Martín López',next:'Precio / proveedor actual'}],activities:[{id:1,date:'18/09/2026',type:'Visita',client:'Café del Centro',detail:'Relevamiento de consumo y presentación de Colombia Premium',owner:'Lucía Fernández'},{id:2,date:'17/09/2026',type:'Llamada',client:'Origen Café',detail:'Se coordinó degustación para la próxima semana',owner:'Martín López'},{id:3,date:'16/09/2026',type:'Propuesta',client:'La Esquina Coffee',detail:'Se presentó propuesta por 110 kg mensuales',owner:'Lucía Fernández'}]};
-let db=JSON.parse(localStorage.getItem('cafeflow'))||seed; const stages=['Contacto inicial','Relevamiento','Degustación','Propuesta','Negociación','Ganada','Perdida'];
-const navItems=[['dashboard','⌂','Inicio'],['clients','▣','Cafeterías'],['contacts','♙','Contactos'],['opportunities','◫','Oportunidades'],['activities','✓','Actividades'],['products','◇','Productos'],['users','⚙','Administración']];
-const sellers=['Lucía Fernández','Martín López'],base=['dashboard','clients','contacts','opportunities','activities','products'];
-const accounts={admin:{name:'Admin',role:'Administrador',pwd:'12345',all:1,assign:1,catalog:1,views:[...base,'users']},comercial:{name:'Comercial',role:'Responsable comercial',pwd:'12345',all:1,assign:1,catalog:1,views:base},vendedor:{name:'Lucía Fernández',role:'Vendedor',pwd:'12345',views:base}};
-let me=null,vw=db;
-function buildNav(){nav.innerHTML=navItems.filter(n=>me.views.includes(n[0])).map(n=>`<button data-view="${n[0]}">${n[1]} <span>${n[2]}</span></button>`).join('')}
-function V(){if(me.all)return db;let cs=db.clients.filter(c=>c.owner===me.name),n=cs.map(c=>c.name);return{clients:cs,contacts:db.contacts.filter(c=>n.includes(c.client)),opps:db.opps.filter(o=>o.owner===me.name),activities:db.activities.filter(a=>a.owner===me.name),products:db.products}}
-function doLogin(e){e.preventDefault();let k=lu.value.trim().toLowerCase(),a=accounts[k];if(!a||a.pwd!==lp.value){lerr.textContent='Usuario o contraseña incorrectos.';lp.select();return}sessionStorage.setItem('cafeflow_user',k);me=a;start()}
-function start(){loginForm.reset();lerr.textContent='';document.body.classList.add('in');userName.textContent=me.name;roleText.textContent=me.role;buildNav();render();show('dashboard')}
-function logout(){sessionStorage.removeItem('cafeflow_user');me=null;closeModal();document.body.classList.remove('in');lu.focus()}
-function teamCard(){return `<div class="section card"><div class="sectionhead"><h2>Desempeño del equipo</h2></div><table class="list"><thead><tr><th>Vendedor</th><th>Cafeterías</th><th>Oport. abiertas</th><th>Valor pipeline</th><th>Ganadas</th></tr></thead><tbody>${sellers.map(s=>{let o=vw.opps.filter(x=>x.owner===s),op=o.filter(x=>!['Ganada','Perdida'].includes(x.stage));return `<tr><td><b>${s}</b></td><td>${vw.clients.filter(c=>c.owner===s).length}</td><td>${op.length}</td><td>${money(op.reduce((t,x)=>t+x.value,0))}</td><td>${o.filter(x=>x.stage==='Ganada').length}</td></tr>`}).join('')}</tbody></table></div>`}
-nav.onclick=e=>{let b=e.target.closest('button');if(!b)return; document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');show(b.dataset.view)};
-function money(n){return new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(n)}function save(){localStorage.setItem('cafeflow',JSON.stringify(db));render()}
-function show(v){if(!me||!me.views.includes(v))return;document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.view===v));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));document.getElementById(v).classList.add('active');let m=navItems.find(x=>x[0]==v);title.textContent=v==='dashboard'?(me.all?'Panel comercial':'Mi panel'):m[2];subtitle.textContent={dashboard:me.all?'Seguimiento de cafeterías, oportunidades y actividad comercial.':'Tus cafeterías asignadas, oportunidades y actividad comercial.',clients:'Información centralizada de las cafeterías clientes.',contacts:'Personas de contacto asociadas a cada cafetería.',opportunities:'Embudo y progreso de las negociaciones comerciales.',activities:'Historial cronológico de interacciones realizadas.',products:'Catálogo comercial de cafés ofrecidos.',users:'Usuarios, roles y configuración general.'}[v]}
-function render(){vw=V();renderDashboard();renderClients();renderContacts();renderOpps();renderActivities();renderProducts();users.innerHTML='';if(me.views.includes('users'))renderUsers()}
-function renderDashboard(){let active=vw.clients.filter(x=>x.status==='Activo').length,open=vw.opps.filter(x=>!['Ganada','Perdida'].includes(x.stage)),won=vw.opps.filter(x=>x.stage==='Ganada').length,total=open.reduce((s,x)=>s+x.value,0);dashboard.innerHTML=`<div class="grid"><div class="card kpi"><small>Cafeterías activas</small><strong>${active}</strong><span>${vw.clients.length} registradas</span></div><div class="card kpi"><small>Oportunidades abiertas</small><strong>${open.length}</strong><span>En seguimiento</span></div><div class="card kpi"><small>Valor del pipeline</small><strong>${money(total)}</strong><span>Estimado comercial</span></div><div class="card kpi"><small>Oportunidades ganadas</small><strong>${won}</strong><span>Histórico</span></div></div><div class="section two"><div class="card"><div class="sectionhead"><h2>Progreso comercial</h2><button class="btn" onclick="show('opportunities')">Ver embudo</button></div><div class="pipeline">${stages.slice(0,5).map(s=>`<div class="stage"><h4>${s}</h4>${vw.opps.filter(o=>o.stage===s).map(o=>`<div class="deal"><b>${o.client}</b>${o.product}<br><small>${money(o.value)}</small></div>`).join('')||'<div class="empty">Sin oportunidades</div>'}</div>`).join('')}</div></div><div class="card"><div class="sectionhead"><h2>Actividad reciente</h2></div>${vw.activities.slice(0,5).map(a=>`<div class="activity"><i class="dot"></i><div><p><b>${a.type}</b> · ${a.client}</p><small>${a.detail}<br>${a.date} · ${a.owner}</small></div></div>`).join('')}</div></div>${me.all?teamCard():''}<div class="section card"><div class="sectionhead"><h2>Cartera de clientes</h2><button class="btn primary" onclick="openModal('client')">+ Cafetería</button></div>${clientTable(vw.clients.slice(0,5))}</div>`}
-function clientTable(rows){return `<table class="list"><thead><tr><th>Cafetería</th><th>Ciudad</th><th>Sucursales</th><th>Consumo kg/mes</th><th>Responsable</th><th>Estado</th></tr></thead><tbody>${rows.map(c=>`<tr><td><b>${c.name}</b></td><td>${c.city}</td><td>${c.branches}</td><td>${c.consumption}</td><td>${c.owner}</td><td><span class="badge ${c.status==='Activo'?'ok':c.status==='Inactivo'?'bad':''}">${c.status}</span></td></tr>`).join('')}</tbody></table>`}
-function renderClients(){clients.innerHTML=`<div class="toolbar"><input id="clientSearch" placeholder="Buscar cafetería..." oninput="filterClients(this.value)"><button class="btn primary" onclick="openModal('client')">+ Nueva cafetería</button></div><div class="card" id="clientList">${clientTable(vw.clients)}</div>`}function filterClients(q){clientList.innerHTML=clientTable(vw.clients.filter(c=>Object.values(c).join(' ').toLowerCase().includes(q.toLowerCase())))}
-function renderContacts(){contacts.innerHTML=`<div class="toolbar"><button class="btn primary" onclick="openModal('contact')">+ Nuevo contacto</button></div><div class="card"><table class="list"><thead><tr><th>Nombre</th><th>Cafetería</th><th>Rol</th><th>Teléfono</th><th>Email</th></tr></thead><tbody>${vw.contacts.map(c=>`<tr><td><b>${c.name}</b></td><td>${c.client}</td><td>${c.role}</td><td>${c.phone}</td><td>${c.email}</td></tr>`).join('')}</tbody></table></div>`}
-function renderOpps(){opportunities.innerHTML=`<div class="toolbar"><button class="btn primary" onclick="openModal('opportunity')">+ Nueva oportunidad</button></div><div class="kanban">${stages.map(s=>`<div class="stage"><h4>${s} · ${vw.opps.filter(o=>o.stage===s).length}</h4>${vw.opps.filter(o=>o.stage===s).map(o=>`<div class="deal"><b>${o.client}</b>${o.product}<br><strong>${money(o.value)}</strong><p>${o.next}</p><select onchange="moveOpp(${o.id},this.value)">${stages.map(x=>`<option ${x===o.stage?'selected':''}>${x}</option>`).join('')}</select>${me.assign?`<select title="Responsable" onchange="reassign(${o.id},this.value)">${[...new Set([...sellers,o.owner])].map(x=>`<option ${x===o.owner?'selected':''}>${x}</option>`).join('')}</select>`:''}</div>`).join('')}</div>`).join('')}</div>`}function moveOpp(id,s){let o=db.opps.find(x=>x.id===id);if(!o||(!me.all&&o.owner!==me.name))return;o.stage=s;save()}function reassign(id,s){if(!me.assign)return;db.opps.find(x=>x.id===id).owner=s;save()}
-function renderActivities(){activities.innerHTML=`<div class="toolbar"><button class="btn primary" onclick="openModal('activity')">+ Registrar actividad</button></div><div class="card"><table class="list"><thead><tr><th>Fecha</th><th>Tipo</th><th>Cafetería</th><th>Detalle</th><th>Vendedor</th></tr></thead><tbody>${vw.activities.map(a=>`<tr><td>${a.date}</td><td><span class="badge">${a.type}</span></td><td><b>${a.client}</b></td><td>${a.detail}</td><td>${a.owner}</td></tr>`).join('')}</tbody></table></div>`}
-function renderProducts(){products.innerHTML=`${me.catalog?`<div class="toolbar"><button class="btn primary" onclick="openModal('product')">+ Nuevo producto</button></div>`:''}<div class="card"><table class="list"><thead><tr><th>Producto</th><th>Tipo</th><th>Presentación</th></tr></thead><tbody>${vw.products.map(p=>`<tr><td><b>${p.name}</b></td><td>${p.type}</td><td>${p.format}</td></tr>`).join('')}</tbody></table></div>`}
-function renderUsers(){users.innerHTML=`<div class="grid"><div class="card"><h3>Administrador</h3><p>Acceso total: ve todas las carteras, gestiona el catálogo, reasigna oportunidades y es el único con acceso a Administración (usuarios, etapas, motivos de pérdida).</p></div><div class="card"><h3>Vendedor</h3><p>Ve y gestiona solo sus cafeterías asignadas, con sus contactos, oportunidades y actividades. Catálogo en solo lectura.</p></div><div class="card"><h3>Responsable comercial</h3><p>Supervisa a todo el equipo: ve todas las carteras y el embudo, reasigna oportunidades, gestiona el catálogo y ve el desempeño por vendedor.</p></div></div><div class="section card"><h2>Usuarios</h2><table class="list"><thead><tr><th>Usuario</th><th>Nombre</th><th>Perfil</th><th>Alcance de datos</th></tr></thead><tbody>${Object.entries(accounts).map(([u,a])=>`<tr><td><b>${u}</b></td><td>${a.name}</td><td>${a.role}</td><td>${a.all?'Todas las cafeterías':'Solo su cartera'}</td></tr>`).join('')}</tbody></table></div><div class="section card"><h2>Etapas configuradas</h2><p>${stages.map(s=>`<span class="badge" style="margin-right:6px">${s}</span>`).join('')}</p><h2>Motivos de pérdida</h2><p>Precio · Proveedor actual · Sin respuesta · Producto no adecuado · Volumen insuficiente</p></div>`}
-const fields={client:[['name','Nombre de cafetería'],['city','Ciudad'],['branches','Cantidad de sucursales','number'],['consumption','Consumo estimado kg/mes','number'],['owner','Responsable comercial'],['status','Estado','select',['Potencial','Activo','Inactivo']]],contact:[['name','Nombre y apellido'],['client','Cafetería','selectClient'],['role','Rol / cargo'],['phone','Teléfono'],['email','Email']],opportunity:[['client','Cafetería','selectClient'],['product','Producto','selectProduct'],['stage','Etapa','select',stages],['value','Valor estimado','number'],['owner','Responsable comercial'],['next','Próximo paso']],activity:[['date','Fecha'],['type','Tipo','select',['Llamada','Visita','Reunión','Degustación','Propuesta']],['client','Cafetería','selectClient'],['detail','Detalle','textarea'],['owner','Responsable']],product:[['name','Nombre'],['type','Tipo'],['format','Presentación']]};
-function openModal(type){if(type==='product'&&!me.catalog)return;modal.classList.add('open');modalTitle.textContent={client:'Nueva cafetería',contact:'Nuevo contacto',opportunity:'Nueva oportunidad',activity:'Registrar actividad',product:'Nuevo producto'}[type];form.innerHTML=fields[type].filter(f=>f[0]!=='owner'||me.assign).map(f=>fieldHTML(f)).join('')+`<div class="field full"><button class="btn primary" type="submit">Guardar</button></div>`;form.onsubmit=e=>{e.preventDefault();let o={id:Date.now()};new FormData(form).forEach((v,k)=>o[k]=['branches','consumption','value'].includes(k)?Number(v):v);if(type!=='product'&&!me.assign)o.owner=me.name;db[type==='client'?'clients':type==='contact'?'contacts':type==='opportunity'?'opps':type==='activity'?'activities':'products'].unshift(o);save();closeModal()}}
-function fieldHTML(f){let [n,l,t='text',opts]=f;if(n==='owner')opts=sellers,t='select';if(t==='selectClient')opts=vw.clients.map(x=>x.name),t='select';if(t==='selectProduct')opts=vw.products.map(x=>x.name),t='select';return `<label class="field ${t==='textarea'?'full':''}"><span>${l}</span>${t==='select'?`<select name="${n}" required>${opts.map(x=>`<option>${x}</option>`).join('')}</select>`:t==='textarea'?`<textarea name="${n}" rows="3" required></textarea>`:`<input name="${n}" type="${t}" ${n==='date'?'value="'+new Date().toLocaleDateString('es-AR')+'"':''} required>`}</label>`}function closeModal(){modal.classList.remove('open')}modal.onclick=e=>{if(e.target===modal)closeModal()};let k0=sessionStorage.getItem('cafeflow_user');if(accounts[k0]){me=accounts[k0];start()}
+'use strict';
+/* ───────── Estado y utilidades ───────── */
+let TOKEN = sessionStorage.getItem('cl_token'), D = null, ME = null;
+const UI = {}, LISTS = {};
+const $ = id => document.getElementById(id);
+const h = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const by = (coll, id) => D[coll].find(x => x.id === Number(id));
+const nm = (coll, id) => (by(coll, id) || {}).name || '—';
+const uName = id => nm('users', id);
+const kName = k => (k ? `${k.firstName} ${k.lastName}` : '—');
+const isMgr = () => ME.role !== 'vendedor';
+const isAdmin = () => ME.role === 'admin';
+const money = n => (n == null || n === '' ? '—' : new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(n));
+const fdt = s => (s ? new Date(s).toLocaleString('es-AR', { dateStyle: 'short', timeStyle: 'short' }) : '—');
+const fd = s => (s ? s.split('-').reverse().join('/') : '—');
+const localNow = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 16); };
+const todayStr = () => localNow().slice(0, 10);
+const go = path => { location.hash = '#/' + path; };
+const sellers = cur => D.users.filter(u => (u.active && u.role !== 'admin') || u.id === cur).map(u => [u.id, u.name + (u.role === 'comercial' ? ' (resp. comercial)' : '')]);
+const activeOpts = (coll, cur) => D[coll].filter(x => x.active || x.id === cur).map(x => [x.id, x.name]);
+const clientOf = o => (o.companyId ? nm('companies', o.companyId) : kName(by('contacts', o.contactId)) + ' (individual)');
+const stageOf = o => by('stages', o.stageId) || {};
+const canEdit = rec => isMgr() || rec.ownerId === ME.id;
+const canEditOpp = o => (o.status === 'Abierta' ? canEdit(o) : isMgr());
+const STATUS_CLS = { Cliente: 'ok', Ganada: 'ok', Inactivo: 'bad', Perdida: 'bad', 'No contactar': 'warn' };
+const badge = s => `<span class="badge ${STATUS_CLS[s] || ''}">${h(s)}</span>`;
+const TYPE_LBL = { open: 'Abierta', won: 'Ganada (cierre)', lost: 'Perdida (cierre)' };
+
+async function api(method, url, body) {
+  let r;
+  try { r = await fetch(url, { method, headers: { 'Content-Type': 'application/json', ...(TOKEN ? { Authorization: 'Bearer ' + TOKEN } : {}) }, body: body ? JSON.stringify(body) : undefined }); }
+  catch { throw new Error('No se pudo conectar con el servidor. Ejecutá "node server.js" y abrí http://localhost:3000'); }
+  let j = {}; try { j = await r.json(); } catch {}
+  if (r.status === 401 && url !== '/api/login') { logout(true); throw new Error(j.error || 'Sesión expirada.'); }
+  if (!r.ok) throw new Error(j.error || 'Error inesperado.');
+  return j;
+}
+async function reload() { D = await api('GET', '/api/data'); ME = D.me; route(); }
+function toast(msg, bad) { const t = $('toast'); t.textContent = msg; t.className = 'toast show' + (bad ? ' bad' : ''); clearTimeout(t._t); t._t = setTimeout(() => (t.className = 'toast'), 4200); }
+
+/* ───────── Sesión ───────── */
+async function doLogin(e) {
+  e.preventDefault(); $('lerr').textContent = '';
+  try {
+    const r = await api('POST', '/api/login', { username: $('lu').value.trim(), password: $('lp').value });
+    TOKEN = r.token; sessionStorage.setItem('cl_token', TOKEN); await start();
+  } catch (err) { $('lerr').textContent = err.message; $('lp').select(); }
+}
+async function start() {
+  await reload().catch(err => { $('lerr').textContent = err.message; throw err; });
+  $('loginForm').reset(); document.body.classList.add('in');
+  $('userName').textContent = ME.name; $('roleText').textContent = D.roles[ME.role];
+  if (!location.hash) go('inicio');
+}
+function logout(expired) {
+  if (TOKEN && !expired) api('POST', '/api/logout').catch(() => {});
+  TOKEN = null; D = null; ME = null; sessionStorage.removeItem('cl_token');
+  closeModal(); document.body.classList.remove('in'); location.hash = ''; $('lu').focus();
+  if (expired) $('lerr').textContent = 'La sesión expiró. Ingresá nuevamente.';
+}
+
+/* ───────── Navegación ───────── */
+const NAV = [['inicio', '⌂', 'Inicio'], ['empresas', '▣', 'Cafeterías'], ['contactos', '♙', 'Contactos'], ['oportunidades', '☰', 'Oportunidades'], ['embudo', '◫', 'Embudo'],
+  ['actividades', '✓', 'Actividades'], ['historial', '⟲', 'Historial comercial'], ['productos', '◇', 'Productos'], ['usuarios', '⚙', 'Usuarios', 1], ['config', '⚒', 'Configuración', 1]];
+function buildNav(cur) {
+  $('nav').innerHTML = NAV.filter(n => !n[3] || isAdmin()).map(n => `<button class="${n[0] === cur ? 'active' : ''}" onclick="go('${n[0]}')">${n[1]} <span>${n[2]}</span></button>`).join('');
+}
+function setHead(t, s) { $('title').textContent = t; $('subtitle').textContent = s; }
+window.addEventListener('hashchange', route);
+function route() {
+  if (!D) return;
+  let [v, id] = location.hash.replace(/^#\/?/, '').split('/');
+  if (!VIEWS[v] || (['usuarios', 'config'].includes(v) && !isAdmin())) v = 'inicio';
+  buildNav(v);
+  try { $('view').innerHTML = VIEWS[v](id); } catch (err) { console.error(err); $('view').innerHTML = `<div class="card empty">${h(err.message)}</div>`; }
+  window.scrollTo(0, 0);
+}
+
+/* ───────── Listados con búsqueda, filtros y paginación ───────── */
+function list(key, cfg) {
+  LISTS[key] = { pageSize: 10, filters: [], empty: 'No hay resultados.', ...cfg };
+  const st = UI[key] || (UI[key] = { q: '', f: { ...(cfg.defaults || {}) }, page: 1 });
+  const L = LISTS[key];
+  return `<div class="toolbar wrap"><input placeholder="${h(L.placeholder || 'Buscar...')}" value="${h(st.q)}" oninput="lset('${key}','q',this.value)">${L.filters.map(f => `<select onchange="lset('${key}','${f.k}',this.value)"><option value="">${h(f.l)}: todos</option>${f.opts.map(([v, l]) => `<option value="${h(v)}" ${String(st.f[f.k] ?? '') === String(v) ? 'selected' : ''}>${h(l)}</option>`).join('')}</select>`).join('')}${L.actions || ''}</div><div id="L_${key}">${listBody(key)}</div>`;
+}
+function filtered(key) {
+  const L = LISTS[key], st = UI[key], q = st.q.trim().toLowerCase();
+  return L.rows.filter(x => (!q || L.search(x).toLowerCase().includes(q)) && L.filters.every(f => !st.f[f.k] || String(f.get(x)) === String(st.f[f.k])));
+}
+function listBody(key) {
+  const L = LISTS[key], st = UI[key];
+  if (L.renderAll) return L.renderAll(filtered(key));
+  const rows = filtered(key), pages = Math.max(1, Math.ceil(rows.length / L.pageSize));
+  if (st.page > pages) st.page = pages;
+  const slice = rows.slice((st.page - 1) * L.pageSize, st.page * L.pageSize);
+  return `<div class="card tight"><table class="list"><thead><tr>${L.cols.map(c => `<th>${c[0]}</th>`).join('')}</tr></thead><tbody>${slice.map(x => `<tr ${L.onRow ? `class="click" onclick="${L.onRow(x)}"` : ''}>${L.cols.map(c => `<td>${c[1](x)}</td>`).join('')}</tr>`).join('') || `<tr><td colspan="${L.cols.length}" class="empty">${L.empty}</td></tr>`}</tbody></table>
+  <div class="pager"><span>${rows.length} resultado(s)</span><div><button class="btn sm" ${st.page <= 1 ? 'disabled' : ''} onclick="lpage('${key}',${st.page - 1})">‹ Anterior</button><span>Página ${st.page} de ${pages}</span><button class="btn sm" ${st.page >= pages ? 'disabled' : ''} onclick="lpage('${key}',${st.page + 1})">Siguiente ›</button></div></div></div>`;
+}
+function lset(key, k, v) { const st = UI[key]; if (k === 'q') st.q = v; else st.f[k] = v; st.page = 1; $('L_' + key).innerHTML = listBody(key); }
+function lpage(key, p) { UI[key].page = p; $('L_' + key).innerHTML = listBody(key); }
+
+/* ───────── Formularios (modal) ───────── */
+function fld(f) {
+  const v = f.v ?? '', req = f.req ? 'required' : '', cls = `field ${f.full || f.t === 'textarea' ? 'full' : ''} ${f.cls || ''}`;
+  const lbl = `<span>${h(f.l)}${f.req ? ' *' : ''}</span>`, help = f.help ? `<small class="help">${h(f.help)}</small>` : '';
+  if (f.t === 'note') return `<div class="notebox">${f.html}</div>`;
+  if (f.t === 'check') return `<label class="${cls} check"><input type="checkbox" name="${f.n}" ${v ? 'checked' : ''}><span>${h(f.l)}</span></label>`;
+  if (f.t === 'select') return `<label class="${cls}">${lbl}<select name="${f.n}" ${req} ${f.on ? `onchange="${f.on}"` : ''}>${f.blank !== undefined ? `<option value="">${h(f.blank)}</option>` : ''}${f.opts.map(o => { const [ov, ol, extra] = Array.isArray(o) ? o : [o, o]; return `<option value="${h(ov)}" ${String(ov) === String(v) ? 'selected' : ''} ${extra || ''}>${h(ol)}</option>`; }).join('')}</select>${help}</label>`;
+  if (f.t === 'textarea') return `<label class="${cls}">${lbl}<textarea name="${f.n}" rows="3" ${req}>${h(v)}</textarea>${help}</label>`;
+  return `<label class="${cls}">${lbl}<input name="${f.n}" type="${f.t || 'text'}" value="${h(v)}" ${req} ${f.attrs || ''}>${help}</label>`;
+}
+function openForm(title, fields, onSubmit, submitLabel = 'Guardar') {
+  $('modalTitle').textContent = title;
+  const F = $('form');
+  F.innerHTML = fields.map(fld).join('') + `<div class="ferr full field" id="ferr"></div><div class="field full"><button class="btn primary" type="submit">${h(submitLabel)}</button></div>`;
+  $('modal').classList.add('open');
+  F.onsubmit = async e => {
+    e.preventDefault();
+    const miss = [...F.querySelectorAll('[required]')].find(el => el.offsetParent !== null && !el.value.trim());
+    if (miss) { $('ferr').textContent = 'Completá los campos obligatorios (*).'; miss.focus(); return; }
+    const data = {};
+    fields.forEach(f => { const el = F.elements[f.n]; if (!el || !f.n) return; data[f.n] = f.t === 'check' ? el.checked : el.value; });
+    const btn = F.querySelector('button[type=submit]'); btn.disabled = true;
+    try { await onSubmit(data); closeModal(); await reload(); } catch (err) { $('ferr').textContent = err.message; } finally { btn.disabled = false; }
+  };
+  const first = F.querySelector('input,select,textarea'); if (first) first.focus();
+}
+function closeModal() { $('modal').classList.remove('open'); }
+$('modal').addEventListener('mousedown', e => { if (e.target === $('modal')) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ───────── Historial (timeline) ───────── */
+function timelineItems(kind, id) {
+  id = Number(id); let opps, acts;
+  if (kind === 'company') {
+    opps = D.opps.filter(o => o.companyId === id);
+    const kids = new Set(D.contacts.filter(k => k.companyId === id).map(k => k.id)), oi = new Set(opps.map(o => o.id));
+    acts = D.activities.filter(a => a.companyId === id || kids.has(a.contactId) || oi.has(a.oppId));
+  } else if (kind === 'contact') {
+    opps = D.opps.filter(o => o.contactId === id); const oi = new Set(opps.map(o => o.id));
+    acts = D.activities.filter(a => a.contactId === id || oi.has(a.oppId));
+  } else { opps = D.opps.filter(o => o.id === id); acts = D.activities.filter(a => a.oppId === id); }
+  const oi = new Set(opps.map(o => o.id));
+  return [...acts.map(a => ({ at: a.at, a })), ...D.stageHistory.filter(s => oi.has(s.oppId)).map(s => ({ at: s.at, s }))].sort((x, y) => (x.at < y.at ? -1 : x.at > y.at ? 1 : 0));
+}
+function relLinks(a, skip) {
+  const out = [];
+  if (a.companyId && skip !== 'company') out.push(`<a href="#/empresas/${a.companyId}">${h(nm('companies', a.companyId))}</a>`);
+  if (a.contactId && skip !== 'contact') out.push(`<a href="#/contactos/${a.contactId}">${h(kName(by('contacts', a.contactId)))}</a>`);
+  if (a.oppId && skip !== 'opp') out.push(`<a href="#/oportunidades/${a.oppId}">${h((by('opps', a.oppId) || {}).title || 'Oportunidad')}</a>`);
+  return out.join(' · ');
+}
+function timeline(kind, id) {
+  const items = timelineItems(kind, id);
+  if (!items.length) return '<div class="empty">Todavía no hay actividades ni cambios de etapa registrados.</div>';
+  return `<div class="help" style="margin-bottom:4px">Orden cronológico (del más antiguo al más reciente).</div><div class="tl">${items.map(it => {
+    if (it.a) { const a = it.a; return `<div class="tli"><div class="ic">✓</div><div><p><b>${h(nm('activityTypes', a.typeId))}</b> ${relLinks(a, kind) ? '· ' + relLinks(a, kind) : ''}</p><small>${fdt(a.at)} · registrada por ${h(uName(a.userId))}</small><div class="res">${h(a.description)}</div><div class="res"><b>Resultado:</b> ${h(a.result)}</div></div></div>`; }
+    const s = it.s, o = by('opps', s.oppId) || {};
+    return `<div class="tli stg"><div class="ic">⇢</div><div><p><b>${s.fromStageId ? 'Cambio de etapa' : 'Inicio de la oportunidad'}</b>: ${s.fromStageId ? h(nm('stages', s.fromStageId)) + ' → ' : ''}<b>${h(nm('stages', s.toStageId))}</b>${kind !== 'opp' ? ` · <a href="#/oportunidades/${o.id}">${h(o.title)}</a>` : ''}</p><small>${fdt(s.at)} · ${h(uName(s.userId))}</small>${s.note ? `<div class="res">${h(s.note)}</div>` : ''}</div></div>`;
+  }).join('')}</div>`;
+}
+
+/* ───────── Vistas ───────── */
+const VIEWS = {};
+
+VIEWS.inicio = () => {
+  setHead(isMgr() ? 'Panel comercial' : 'Mi panel', isMgr() ? 'Estado general de cafeterías, oportunidades y actividad del equipo.' : 'Tus cafeterías asignadas, oportunidades y actividad comercial.');
+  const open = D.opps.filter(o => o.status === 'Abierta'), openStages = D.stages.filter(s => s.active && s.type === 'open');
+  const recent = D.activities.slice().sort((a, b) => (a.at < b.at ? 1 : -1)).slice(0, 6);
+  const team = isMgr() ? D.users.filter(u => u.role !== 'admin' && u.active) : [];
+  return `<div class="grid"><div class="card kpi"><small>Cafeterías</small><strong>${D.companies.filter(c => c.status === 'Cliente').length}</strong><span>clientes de ${D.companies.length} registradas</span></div>
+  <div class="card kpi"><small>Oportunidades abiertas</small><strong>${open.length}</strong><span>en seguimiento</span></div>
+  <div class="card kpi"><small>Valor estimado abierto</small><strong>${money(open.reduce((t, o) => t + (o.value || 0), 0))}</strong><span>suma de valores estimados</span></div>
+  <div class="card kpi"><small>Cerradas</small><strong>${D.opps.filter(o => o.status === 'Ganada').length} / ${D.opps.filter(o => o.status === 'Perdida').length}</strong><span>ganadas / perdidas</span></div></div>
+  <div class="section two"><div class="card"><div class="sectionhead"><h2>Embudo abierto</h2><button class="btn" onclick="go('embudo')">Ver tablero</button></div><div class="pipeline" style="grid-template-columns:repeat(${Math.min(openStages.length, 5)},1fr)">${openStages.map(s => { const os = open.filter(o => o.stageId === s.id); return `<div class="stage"><h4>${h(s.name)} · ${os.length}</h4>${os.slice(0, 3).map(o => `<div class="deal click" onclick="go('oportunidades/${o.id}')"><b>${h(clientOf(o))}</b>${h(nm('products', o.productId))}<br><small>${money(o.value)}</small></div>`).join('') || '<div class="empty" style="padding:10px">—</div>'}</div>`; }).join('')}</div></div>
+  <div class="card"><div class="sectionhead"><h2>Actividad reciente</h2><button class="btn" onclick="go('actividades')">Ver todas</button></div>${recent.map(a => `<div class="activity"><i class="dot"></i><div><p><b>${h(nm('activityTypes', a.typeId))}</b> · ${relLinks(a)}</p><small>${h(a.description)}<br>${fdt(a.at)} · ${h(uName(a.userId))}</small></div></div>`).join('') || '<div class="empty">Sin actividad</div>'}</div></div>
+  ${team.length ? `<div class="section card"><div class="sectionhead"><h2>Equipo comercial</h2></div><table class="list"><thead><tr><th>Vendedor</th><th>Cafeterías</th><th>Oport. abiertas</th><th>Valor abierto</th><th>Ganadas</th><th>Perdidas</th></tr></thead><tbody>${team.map(u => { const os = D.opps.filter(o => o.ownerId === u.id), op = os.filter(o => o.status === 'Abierta'); return `<tr><td><b>${h(u.name)}</b></td><td>${D.companies.filter(c => c.ownerId === u.id).length}</td><td>${op.length}</td><td>${money(op.reduce((t, o) => t + (o.value || 0), 0))}</td><td>${os.filter(o => o.status === 'Ganada').length}</td><td>${os.filter(o => o.status === 'Perdida').length}</td></tr>`; }).join('')}</tbody></table></div>` : ''}`;
+};
+
+/* Cafeterías */
+VIEWS.empresas = id => {
+  if (id) return companyDetail(id);
+  setHead('Cafeterías', 'Locales gastronómicos clientes y potenciales. Las bajas son lógicas: se cambia el estado a Inactivo o No contactar.');
+  return list('companies', {
+    rows: D.companies, placeholder: 'Buscar por nombre, CUIT, ciudad o email...',
+    search: c => [c.name, c.cuit, c.city, c.email, c.address, c.currentSupplier].join(' '),
+    filters: [{ k: 'status', l: 'Estado', opts: D.partyStatus.map(s => [s, s]), get: c => c.status },
+      ...(isMgr() ? [{ k: 'owner', l: 'Responsable', opts: sellers(), get: c => c.ownerId }] : []),
+      { k: 'origin', l: 'Origen', opts: D.origins.map(o => [o.id, o.name]), get: c => c.originId },
+      { k: 'industry', l: 'Tipo', opts: D.industries.map(s => [s, s]), get: c => c.industry }],
+    actions: `<button class="btn primary" onclick="companyForm()">+ Nueva cafetería</button>`,
+    cols: [['Cafetería', c => `<b>${h(c.name)}</b><br><small class="muted">${h(c.industry)}</small>`], ['Ciudad', c => h(c.city)], ['Sucursales', c => c.branches], ['Consumo kg/mes', c => c.consumption],
+      ['Proveedor actual', c => h(c.currentSupplier || '—')], ['Responsable', c => h(uName(c.ownerId))], ['Estado', c => badge(c.status)]],
+    onRow: c => `go('empresas/${c.id}')`,
+  });
+};
+function companyForm(c) {
+  c = c || { status: 'Potencial', ownerId: ME.id, branches: 1, equipment: 'Sin máquina', industry: D.industries[0] };
+  openForm(c.id ? 'Editar cafetería' : 'Nueva cafetería', [
+    { n: 'name', l: 'Razón social / nombre comercial', req: 1, v: c.name, full: 1 }, { n: 'cuit', l: 'CUIT', v: c.cuit, attrs: 'placeholder="30-12345678-9"' },
+    { n: 'industry', l: 'Tipo de establecimiento', t: 'select', opts: D.industries, v: c.industry, req: 1 },
+    { n: 'email', l: 'Correo electrónico', t: 'email', v: c.email }, { n: 'phone', l: 'Teléfono', v: c.phone },
+    { n: 'address', l: 'Dirección', v: c.address }, { n: 'city', l: 'Localidad', v: c.city }, { n: 'web', l: 'Sitio web / Instagram', v: c.web },
+    { n: 'status', l: 'Estado', t: 'select', opts: D.partyStatus, v: c.status, req: 1, help: 'Para dar de baja usá Inactivo o No contactar: se conserva el historial.' },
+    { n: 'branches', l: 'Cantidad de sucursales', t: 'number', v: c.branches, attrs: 'min="1"' }, { n: 'consumption', l: 'Consumo estimado (kg/mes)', t: 'number', v: c.consumption, attrs: 'min="0"' },
+    { n: 'currentSupplier', l: 'Proveedor de café actual', v: c.currentSupplier }, { n: 'equipment', l: 'Equipamiento', t: 'select', opts: D.equipment, v: c.equipment },
+    { n: 'originId', l: 'Origen', t: 'select', opts: activeOpts('origins', c.originId), v: c.originId, req: 1, blank: 'Seleccioná...' },
+    ...(isMgr() ? [{ n: 'ownerId', l: 'Responsable comercial', t: 'select', opts: sellers(c.ownerId), v: c.ownerId, req: 1 }] : []),
+    { n: 'notes', l: 'Observaciones', t: 'textarea', v: c.notes },
+  ], async d => { const r = await api(c.id ? 'PUT' : 'POST', '/api/companies' + (c.id ? '/' + c.id : ''), d); toast('Cafetería guardada.'); if (!c.id) go('empresas/' + r.id); });
+}
+function companyDetail(id) {
+  const c = by('companies', id); if (!c) { setHead('Cafetería', ''); return '<div class="card empty">Cafetería inexistente o sin acceso.</div>'; }
+  setHead(c.name, 'Detalle de la cafetería e historial comercial.');
+  const ks = D.contacts.filter(k => k.companyId === c.id), os = D.opps.filter(o => o.companyId === c.id);
+  return `<div class="card"><div class="headcard"><div><h2>${h(c.name)} ${badge(c.status)}</h2><span class="muted">${h(c.industry)} · Responsable: <b>${h(uName(c.ownerId))}</b></span></div><div class="btns">${canEdit(c) ? `<button class="btn" onclick="companyForm(by('companies',${c.id}))">Editar</button>` : ''}<button class="btn" onclick="contactForm(null,${c.id})">+ Contacto</button><button class="btn" onclick="activityForm({companyId:${c.id}})">+ Actividad</button><button class="btn primary" onclick="oppForm(null,{companyId:${c.id}})">+ Oportunidad</button></div></div>
+  <div class="dl section">${[['CUIT', c.cuit], ['Correo', c.email], ['Teléfono', c.phone], ['Dirección', [c.address, c.city].filter(Boolean).join(', ')], ['Sitio web', c.web], ['Origen', nm('origins', c.originId)], ['Sucursales', c.branches], ['Consumo estimado', c.consumption + ' kg/mes'], ['Proveedor actual', c.currentSupplier], ['Equipamiento', c.equipment], ['Alta', fdt(c.createdAt) + ' · ' + uName(c.createdBy)], ['Última modificación', fdt(c.updatedAt) + ' · ' + uName(c.updatedBy)]].map(([l, v]) => `<div><small>${l}</small>${h(v || '—')}</div>`).join('')}</div>
+  ${c.notes ? `<div class="summary section">${h(c.notes)}</div>` : ''}</div>
+  <div class="section two"><div class="card"><div class="sectionhead"><h2>Oportunidades (${os.length})</h2></div>${oppMiniTable(os)}</div>
+  <div class="card"><div class="sectionhead"><h2>Contactos (${ks.length})</h2></div><table class="list"><tbody>${ks.map(k => `<tr class="click" onclick="go('contactos/${k.id}')"><td><b>${h(kName(k))}</b><br><small class="muted">${h(k.position)}</small></td><td>${badge(k.status)}</td></tr>`).join('') || '<tr><td class="empty">Sin contactos</td></tr>'}</tbody></table></div></div>
+  <div class="section card"><div class="sectionhead"><h2>Historial comercial</h2><button class="btn" onclick="activityForm({companyId:${c.id}})">+ Registrar actividad</button></div>${timeline('company', c.id)}</div>`;
+}
+function oppMiniTable(os) {
+  return `<table class="list"><thead><tr><th>Oportunidad</th><th>Etapa</th><th>Estado</th><th>Valor</th></tr></thead><tbody>${os.map(o => `<tr class="click" onclick="go('oportunidades/${o.id}')"><td><b>${h(o.title)}</b><br><small class="muted">${h(nm('products', o.productId))}</small></td><td>${h(stageOf(o).name)}</td><td>${badge(o.status)}</td><td>${money(o.finalValue ?? o.value)}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">Sin oportunidades</td></tr>'}</tbody></table>`;
+}
+
+/* Contactos */
+VIEWS.contactos = id => {
+  if (id) return contactDetail(id);
+  setHead('Contactos', 'Personas vinculadas a cafeterías o clientes individuales (baristas, carros de café, emprendedores).');
+  return list('contacts', {
+    rows: D.contacts, placeholder: 'Buscar por nombre, documento, email o cafetería...',
+    search: k => [k.firstName, k.lastName, k.doc, k.email, k.phone, k.position, nm('companies', k.companyId)].join(' '),
+    filters: [{ k: 'status', l: 'Estado', opts: D.partyStatus.map(s => [s, s]), get: k => k.status },
+      ...(isMgr() ? [{ k: 'owner', l: 'Responsable', opts: sellers(), get: k => k.ownerId }] : []),
+      { k: 'origin', l: 'Origen', opts: D.origins.map(o => [o.id, o.name]), get: k => k.originId },
+      { k: 'company', l: 'Cafetería', opts: [['0', 'Cliente individual'], ...D.companies.map(c => [c.id, c.name])], get: k => k.companyId || 0 }],
+    actions: `<button class="btn primary" onclick="contactForm()">+ Nuevo contacto</button>`,
+    cols: [['Nombre', k => `<b>${h(kName(k))}</b><br><small class="muted">${h(k.position)}</small>`], ['Cafetería', k => (k.companyId ? h(nm('companies', k.companyId)) : '<span class="muted">Cliente individual</span>')],
+      ['Email', k => h(k.email)], ['Teléfono', k => h(k.phone)], ['Responsable', k => h(uName(k.ownerId))], ['Estado', k => badge(k.status)]],
+    onRow: k => `go('contactos/${k.id}')`,
+  });
+};
+function contactForm(k, companyId) {
+  const comp = companyId ? by('companies', companyId) : null;
+  k = k || { status: 'Potencial', companyId: companyId || '', ownerId: comp ? comp.ownerId : ME.id, originId: comp ? comp.originId : '' };
+  openForm(k.id ? 'Editar contacto' : 'Nuevo contacto', [
+    { n: 'firstName', l: 'Nombre', req: 1, v: k.firstName }, { n: 'lastName', l: 'Apellido', req: 1, v: k.lastName },
+    { n: 'doc', l: 'Documento', v: k.doc }, { n: 'position', l: 'Cargo / rol', v: k.position, attrs: 'placeholder="Dueño, encargado, barista..."' },
+    { n: 'email', l: 'Correo electrónico', t: 'email', v: k.email }, { n: 'phone', l: 'Teléfono', v: k.phone },
+    { n: 'companyId', l: 'Cafetería', t: 'select', blank: '— Cliente individual (sin cafetería) —', opts: D.companies.map(c => [c.id, c.name]), v: k.companyId },
+    { n: 'status', l: 'Estado', t: 'select', opts: D.partyStatus, v: k.status, req: 1 },
+    { n: 'originId', l: 'Origen', t: 'select', opts: activeOpts('origins', k.originId), v: k.originId, req: 1, blank: 'Seleccioná...' },
+    ...(isMgr() ? [{ n: 'ownerId', l: 'Responsable comercial', t: 'select', opts: sellers(k.ownerId), v: k.ownerId, req: 1 }] : []),
+    { n: 'notes', l: 'Observaciones', t: 'textarea', v: k.notes },
+  ], async d => { const r = await api(k.id ? 'PUT' : 'POST', '/api/contacts' + (k.id ? '/' + k.id : ''), d); toast('Contacto guardado.'); if (!k.id && !companyId) go('contactos/' + r.id); });
+}
+function contactDetail(id) {
+  const k = by('contacts', id); if (!k) { setHead('Contacto', ''); return '<div class="card empty">Contacto inexistente o sin acceso.</div>'; }
+  setHead(kName(k), 'Detalle del contacto e historial comercial.');
+  const os = D.opps.filter(o => o.contactId === k.id);
+  return `<div class="card"><div class="headcard"><div><h2>${h(kName(k))} ${badge(k.status)}</h2><span class="muted">${h(k.position || 'Sin cargo')} · ${k.companyId ? `<a href="#/empresas/${k.companyId}">${h(nm('companies', k.companyId))}</a>` : 'Cliente individual'} · Responsable: <b>${h(uName(k.ownerId))}</b></span></div><div class="btns">${canEdit(k) ? `<button class="btn" onclick="contactForm(by('contacts',${k.id}))">Editar</button>` : ''}<button class="btn" onclick="activityForm({contactId:${k.id}})">+ Actividad</button><button class="btn primary" onclick="oppForm(null,{contactId:${k.id},companyId:${k.companyId || 'null'}})">+ Oportunidad</button></div></div>
+  <div class="dl section">${[['Documento', k.doc], ['Correo', k.email], ['Teléfono', k.phone], ['Origen', nm('origins', k.originId)], ['Alta', fdt(k.createdAt) + ' · ' + uName(k.createdBy)], ['Última modificación', fdt(k.updatedAt) + ' · ' + uName(k.updatedBy)]].map(([l, v]) => `<div><small>${l}</small>${h(v || '—')}</div>`).join('')}</div>${k.notes ? `<div class="summary section">${h(k.notes)}</div>` : ''}</div>
+  <div class="section card"><div class="sectionhead"><h2>Oportunidades (${os.length})</h2></div>${oppMiniTable(os)}</div>
+  <div class="section card"><div class="sectionhead"><h2>Historial comercial</h2><button class="btn" onclick="activityForm({contactId:${k.id}})">+ Registrar actividad</button></div>${timeline('contact', k.id)}</div>`;
+}
+
+/* Oportunidades */
+const oppFilters = withStage => [
+  ...(isMgr() ? [{ k: 'owner', l: 'Responsable', opts: sellers(), get: o => o.ownerId }] : []),
+  ...(withStage ? [{ k: 'stage', l: 'Etapa', opts: D.stages.map(s => [s.id, s.name]), get: o => o.stageId }] : []),
+  { k: 'status', l: 'Estado', opts: ['Abierta', 'Ganada', 'Perdida'].map(s => [s, s]), get: o => o.status },
+  { k: 'origin', l: 'Origen', opts: D.origins.map(o => [o.id, o.name]), get: o => o.originId }];
+const oppSearch = o => [o.title, clientOf(o), nm('products', o.productId), uName(o.ownerId), o.notes].join(' ');
+VIEWS.oportunidades = id => {
+  if (id) return oppDetail(id);
+  setHead('Oportunidades', 'Negociaciones concretas de venta de café y equipamiento.');
+  return list('opps', {
+    rows: D.opps.slice().sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1)), placeholder: 'Buscar por título, cliente o producto...', search: oppSearch, filters: oppFilters(true),
+    actions: `<button class="btn" onclick="go('embudo')">Ver tablero</button><button class="btn primary" onclick="oppForm()">+ Nueva oportunidad</button>`,
+    cols: [['Oportunidad', o => `<b>${h(o.title)}</b><br><small class="muted">${h(clientOf(o))}</small>`], ['Producto', o => h(nm('products', o.productId))], ['Etapa', o => h(stageOf(o).name)], ['Estado', o => badge(o.status)],
+      ['Valor', o => money(o.finalValue ?? o.value)], ['Cierre', o => (o.closeDate ? fd(o.closeDate) : `<span class="muted">est. ${fd(o.expectedClose)}</span>`)], ['Responsable', o => h(uName(o.ownerId))]],
+    onRow: o => `go('oportunidades/${o.id}')`,
+  });
+};
+VIEWS.embudo = () => {
+  setHead('Embudo comercial', 'Arrastrá una tarjeta a otra columna para cambiar la etapa. Las columnas de cierre piden fecha, valor final o motivo de pérdida.');
+  return list('board', {
+    rows: D.opps, placeholder: 'Buscar oportunidad...', search: oppSearch, filters: oppFilters(false),
+    actions: `<button class="btn" onclick="go('oportunidades')">Ver lista</button><button class="btn primary" onclick="oppForm()">+ Nueva oportunidad</button>`,
+    renderAll: rows => { const st = D.stages.filter(s => s.active || rows.some(o => o.stageId === s.id)); return `<div class="kanban" style="--n:${st.length}">${st.map(s => { const os = rows.filter(o => o.stageId === s.id); return `<div class="stage ${s.type}" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="this.classList.remove('over');dropOpp(event,${s.id})"><h4><span>${h(s.name)}${s.requiresTasting ? ' ☕' : ''}</span><span>${os.length}</span></h4>${os.map(o => `<div class="deal" draggable="${canEditOpp(o)}" ondragstart="event.dataTransfer.setData('text/plain','${o.id}')" onclick="go('oportunidades/${o.id}')"><b>${h(o.title)}</b>${h(clientOf(o))}<div class="meta">${h(nm('products', o.productId))} · ${money(o.finalValue ?? o.value)}</div><div class="meta">${h(uName(o.ownerId))}${o.status !== 'Abierta' ? ' · ' + badge(o.status) : ''}</div></div>`).join('') || '<div class="empty" style="padding:14px">—</div>'}</div>`; }).join('')}</div><p class="help">☕ = la etapa exige una degustación registrada en la oportunidad.</p>`; },
+  });
+};
+function dropOpp(e, stageId) {
+  e.preventDefault(); const o = by('opps', e.dataTransfer.getData('text/plain')), st = by('stages', stageId);
+  if (!o || o.stageId === stageId) return;
+  if (st.type !== 'open' || o.status !== 'Abierta') return stageForm(o, stageId);
+  api('POST', `/api/opps/${o.id}/stage`, { stageId }).then(() => { toast(`"${o.title}" pasó a ${st.name}.`); return reload(); }).catch(err => toast(err.message, true));
+}
+function stageForm(o, stageId) {
+  const closed = o.status !== 'Abierta', opts = D.stages.filter(s => s.active && s.id !== o.stageId);
+  stageId = stageId || (opts[0] || {}).id;
+  openForm(closed ? 'Cambio autorizado de oportunidad cerrada' : 'Cambiar etapa', [
+    ...(closed ? [{ t: 'note', html: `Esta oportunidad está <b>${h(o.status.toLowerCase())}</b>. El cambio queda registrado en el historial y en la auditoría con tu usuario y el motivo.` }] : []),
+    { t: 'note', html: `Etapa actual: <b>${h(stageOf(o).name)}</b>` },
+    { n: 'stageId', l: 'Nueva etapa', t: 'select', req: 1, opts: opts.map(s => [s.id, s.name + (s.type !== 'open' ? ' — cierre' : ''), `data-type="${s.type}"`]), v: stageId, on: 'stageToggle()', full: 1 },
+    { n: 'closeDate', l: 'Fecha real de cierre', t: 'date', v: todayStr(), cls: 'cond cond-won cond-lost', attrs: `max="${todayStr()}"`, req: 1 },
+    { n: 'finalValue', l: 'Valor final ($)', t: 'number', v: o.value || '', cls: 'cond cond-won', attrs: 'min="1"', req: 1 },
+    { n: 'lossReasonId', l: 'Motivo de pérdida', t: 'select', blank: 'Seleccioná...', opts: activeOpts('lossReasons'), cls: 'cond cond-lost', req: 1 },
+    { n: 'note', l: closed ? 'Motivo de la autorización' : 'Observación', t: 'textarea', req: closed ? 1 : 0 },
+  ], async d => { await api('POST', `/api/opps/${o.id}/stage`, d); toast('Etapa actualizada.'); }, 'Confirmar cambio');
+  stageToggle();
+}
+function stageToggle() {
+  const sel = $('form').elements.stageId, t = sel.selectedOptions[0] ? sel.selectedOptions[0].dataset.type : 'open';
+  $('form').querySelectorAll('.cond').forEach(el => { el.style.display = el.classList.contains('cond-' + t) ? '' : 'none'; });
+}
+function closeAs(id, type) { const o = by('opps', id), st = D.stages.find(s => s.active && s.type === type); if (st) stageForm(o, st.id); else toast('No hay una etapa de ese tipo configurada.', true); }
+function oppForm(o, preset = {}) {
+  const isNew = !o;
+  if (isNew) { const comp = preset.companyId ? by('companies', preset.companyId) : null; o = { ownerId: comp && isMgr() ? comp.ownerId : ME.id, deliveryFreq: 'Semanal', comodato: false, originId: comp ? comp.originId : '', ...preset }; }
+  const closed = !isNew && o.status !== 'Abierta';
+  const firstStages = D.stages.filter(s => s.active && s.type === 'open' && !s.requiresTasting);
+  openForm(isNew ? 'Nueva oportunidad' : 'Editar oportunidad', [
+    ...(closed ? [{ t: 'note', html: `Oportunidad <b>${h(o.status.toLowerCase())}</b>: la modificación requiere autorización y queda registrada con tu usuario.` }] : []),
+    { n: 'title', l: 'Título', req: 1, v: o.title, full: 1, attrs: 'placeholder="Ej.: Cambio de proveedor — 2 sucursales"' },
+    { n: 'companyId', l: 'Cafetería', t: 'select', blank: '— Sin cafetería (cliente individual) —', opts: D.companies.filter(c => c.status !== 'No contactar' || c.id === o.companyId).map(c => [c.id, c.name]), v: o.companyId, on: 'filterContacts()' },
+    { n: 'contactId', l: 'Contacto', t: 'select', blank: '— Sin contacto —', opts: D.contacts.map(k => [k.id, kName(k) + (k.companyId ? ' · ' + nm('companies', k.companyId) : ' · individual'), `data-c="${k.companyId || 0}"`]), v: o.contactId, help: 'Obligatorio indicar al menos cafetería o contacto.' },
+    { n: 'productId', l: 'Producto o servicio', t: 'select', req: 1, blank: 'Seleccioná...', opts: activeOpts('products', o.productId), v: o.productId },
+    ...(isNew ? [{ n: 'stageId', l: 'Etapa inicial', t: 'select', req: 1, opts: firstStages.map(s => [s.id, s.name]), v: (firstStages[0] || {}).id }] : []),
+    { n: 'value', l: 'Valor estimado ($)', t: 'number', v: o.value, attrs: 'min="0"' },
+    { n: 'prob', l: 'Probabilidad de cierre (%)', t: 'number', v: o.probManual ? o.prob : '', attrs: 'min="0" max="100" placeholder="Por defecto, la de la etapa"' },
+    { n: 'expectedClose', l: 'Fecha estimada de cierre', t: 'date', v: o.expectedClose },
+    { n: 'originId', l: 'Origen', t: 'select', req: 1, blank: 'Seleccioná...', opts: activeOpts('origins', o.originId), v: o.originId },
+    { n: 'volumeKg', l: 'Volumen estimado (kg/mes)', t: 'number', v: o.volumeKg, attrs: 'min="0"' },
+    { n: 'deliveryFreq', l: 'Frecuencia de entrega', t: 'select', opts: D.delivery, v: o.deliveryFreq },
+    ...(isMgr() ? [{ n: 'ownerId', l: 'Responsable comercial', t: 'select', req: 1, opts: sellers(o.ownerId), v: o.ownerId }] : []),
+    { n: 'comodato', l: 'Incluye máquina en comodato', t: 'check', v: o.comodato },
+    ...(closed ? [{ n: 'closeDate', l: 'Fecha real de cierre', t: 'date', req: 1, v: o.closeDate, attrs: `max="${todayStr()}"` },
+      o.status === 'Ganada' ? { n: 'finalValue', l: 'Valor final ($)', t: 'number', req: 1, v: o.finalValue } : { n: 'lossReasonId', l: 'Motivo de pérdida', t: 'select', req: 1, opts: activeOpts('lossReasons', o.lossReasonId), v: o.lossReasonId },
+      { n: 'authNote', l: 'Motivo de la modificación', t: 'textarea', req: 1 }] : []),
+    { n: 'notes', l: 'Observaciones', t: 'textarea', v: o.notes },
+  ], async d => { const r = await api(isNew ? 'POST' : 'PUT', '/api/opps' + (isNew ? '' : '/' + o.id), d); toast('Oportunidad guardada.'); if (isNew) go('oportunidades/' + r.id); });
+  filterContacts(true);
+}
+function filterContacts(keep) {
+  const F = $('form'), c = F.elements.companyId.value, sel = F.elements.contactId;
+  [...sel.options].forEach(op => { if (!op.value) return; const ok = !c || op.dataset.c === c || op.dataset.c === '0'; op.hidden = !ok; if (!ok && op.selected) sel.value = ''; });
+}
+function reassignForm(id) {
+  const o = by('opps', id), closed = o.status !== 'Abierta';
+  openForm('Reasignar oportunidad', [{ t: 'note', html: `Responsable actual: <b>${h(uName(o.ownerId))}</b>` }, { n: 'ownerId', l: 'Nuevo responsable', t: 'select', req: 1, opts: sellers(o.ownerId), v: o.ownerId, full: 1 },
+    ...(closed ? [{ n: 'authNote', l: 'Motivo (oportunidad cerrada)', t: 'textarea', req: 1 }] : [])],
+  async d => { await api('PUT', '/api/opps/' + o.id, { ...o, prob: o.probManual ? o.prob : '', ...d }); toast('Oportunidad reasignada.'); }, 'Reasignar');
+}
+function oppDetail(id) {
+  const o = by('opps', id); if (!o) { setHead('Oportunidad', ''); return '<div class="card empty">Oportunidad inexistente o sin acceso.</div>'; }
+  setHead(o.title, 'Detalle de la oportunidad, recorrido por el embudo e historial.');
+  const hist = D.stageHistory.filter(s => s.oppId === o.id).sort((a, b) => (a.at < b.at ? -1 : 1)), aud = D.audit.filter(a => a.entity === 'opps' && a.entityId === o.id).sort((a, b) => (a.at < b.at ? -1 : 1));
+  const open = o.status === 'Abierta', edit = canEditOpp(o), first = hist[0];
+  const tasting = D.activities.some(a => a.oppId === o.id && (by('activityTypes', a.typeId) || {}).key === 'degustacion');
+  return `<div class="card"><div class="headcard"><div><h2>${h(o.title)} ${badge(o.status)}</h2><span class="muted">${o.companyId ? `<a href="#/empresas/${o.companyId}">${h(nm('companies', o.companyId))}</a>` : 'Cliente individual'}${o.contactId ? ` · <a href="#/contactos/${o.contactId}">${h(kName(by('contacts', o.contactId)))}</a>` : ''} · Responsable: <b>${h(uName(o.ownerId))}</b></span></div>
+  <div class="btns">${edit ? `<button class="btn" onclick="oppForm(by('opps',${o.id}))">Editar</button>` : ''}${isMgr() ? `<button class="btn" onclick="reassignForm(${o.id})">Reasignar</button>` : ''}<button class="btn" onclick="activityForm({oppId:${o.id}})">+ Actividad</button>
+  ${open && edit ? `<button class="btn" onclick="stageForm(by('opps',${o.id}))">Cambiar etapa</button><button class="btn okb" onclick="closeAs(${o.id},'won')">Marcar ganada</button><button class="btn danger" onclick="closeAs(${o.id},'lost')">Marcar perdida</button>` : ''}
+  ${!open && isMgr() ? `<button class="btn primary" onclick="stageForm(by('opps',${o.id}))">Reabrir / cambiar etapa</button>` : ''}</div></div>
+  <div class="dl section">${[['Etapa actual', stageOf(o).name], ['Producto', nm('products', o.productId)], ['Valor estimado', money(o.value)], ['Probabilidad', (o.prob ?? '—') + '%' + (o.probManual ? ' (manual)' : '')], ['Fecha estimada de cierre', fd(o.expectedClose)], ['Origen', nm('origins', o.originId)],
+    ['Volumen', o.volumeKg != null ? o.volumeKg + ' kg/mes' : '—'], ['Entrega', o.deliveryFreq], ['Comodato de máquina', o.comodato ? 'Sí' : 'No'],
+    ['Fecha real de cierre', fd(o.closeDate)], ['Valor final', money(o.finalValue)], ['Motivo de pérdida', o.lossReasonId ? nm('lossReasons', o.lossReasonId) : '—'],
+    ['Degustación registrada', tasting ? 'Sí' : 'No'], ['Alta', fdt(o.createdAt) + ' · ' + uName(o.createdBy)], ['Última modificación', fdt(o.updatedAt) + ' · ' + uName(o.updatedBy)]].map(([l, v]) => `<div><small>${l}</small>${h(v)}</div>`).join('')}</div>${o.notes ? `<div class="summary section">${h(o.notes)}</div>` : ''}
+  ${!open && !isMgr() ? '<p class="help">La oportunidad está cerrada. Solo el responsable comercial o el administrador pueden modificarla o reabrirla.</p>' : ''}</div>
+  <div class="section card"><div class="sectionhead"><h2>Historial de etapas</h2></div>
+  ${first ? `<div class="summary">Comenzó en <b>${h(nm('stages', first.toStageId))}</b> el ${fdt(first.at)} (${h(uName(first.userId))}). Recorrido: ${hist.map(s => h(nm('stages', s.toStageId))).join(' → ')}.${!open ? ` Finalizó como <b>${h(o.status.toLowerCase())}</b> el ${fd(o.closeDate)}${o.status === 'Ganada' ? ' por ' + money(o.finalValue) : ' — motivo: ' + h(nm('lossReasons', o.lossReasonId))}.` : ''}</div>` : ''}
+  <table class="list"><thead><tr><th>Fecha y hora</th><th>Etapa anterior</th><th>Nueva etapa</th><th>Usuario</th><th>Observación</th></tr></thead><tbody>${hist.map(s => `<tr><td>${fdt(s.at)}</td><td>${s.fromStageId ? h(nm('stages', s.fromStageId)) : '<span class="muted">(inicio)</span>'}</td><td><b>${h(nm('stages', s.toStageId))}</b></td><td>${h(uName(s.userId))}</td><td>${h(s.note)}</td></tr>`).join('')}</tbody></table></div>
+  <div class="section card"><div class="sectionhead"><h2>Historial comercial</h2><button class="btn" onclick="activityForm({oppId:${o.id}})">+ Registrar actividad</button></div>${timeline('opp', o.id)}</div>
+  <div class="section card"><div class="sectionhead"><h2>Registro de cambios</h2></div><table class="list"><thead><tr><th>Fecha y hora</th><th>Acción</th><th>Detalle</th><th>Usuario</th></tr></thead><tbody>${aud.map(a => `<tr><td>${fdt(a.at)}</td><td>${h(a.action)}</td><td>${h(a.detail)}</td><td>${h(uName(a.userId))}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">Sin cambios registrados</td></tr>'}</tbody></table></div>`;
+}
+
+/* Actividades */
+VIEWS.actividades = () => {
+  setHead('Actividades', 'Interacciones comerciales que ya ocurrieron. Son hechos históricos: no se editan ni se eliminan.');
+  return list('acts', {
+    rows: D.activities.slice().sort((a, b) => (a.at < b.at ? 1 : -1)), placeholder: 'Buscar en descripción, resultado o cliente...',
+    search: a => [a.description, a.result, nm('companies', a.companyId), kName(by('contacts', a.contactId)), (by('opps', a.oppId) || {}).title].join(' '),
+    filters: [{ k: 'type', l: 'Tipo', opts: D.activityTypes.map(t => [t.id, t.name]), get: a => a.typeId },
+      ...(isMgr() ? [{ k: 'user', l: 'Usuario', opts: D.users.map(u => [u.id, u.name]), get: a => a.userId }] : [])],
+    actions: `<button class="btn primary" onclick="activityForm()">+ Registrar actividad</button>`,
+    cols: [['Fecha y hora', a => fdt(a.at)], ['Tipo', a => `<span class="badge">${h(nm('activityTypes', a.typeId))}</span>`], ['Relacionada con', a => relLinks(a)], ['Descripción', a => h(a.description)], ['Resultado', a => h(a.result)], ['Registró', a => h(uName(a.userId))]],
+  });
+};
+function activityForm(preset = {}) {
+  const o = preset.oppId ? by('opps', preset.oppId) : null;
+  const v = { companyId: preset.companyId ?? (o && o.companyId), contactId: preset.contactId ?? (o && o.contactId), oppId: preset.oppId };
+  openForm('Registrar actividad', [
+    { t: 'note', html: 'Registrá algo que <b>ya ocurrió</b> (llamada, visita, degustación...). No se usan para agendar tareas futuras.' },
+    { n: 'typeId', l: 'Tipo', t: 'select', req: 1, blank: 'Seleccioná...', opts: activeOpts('activityTypes') },
+    { n: 'at', l: 'Fecha y hora', t: 'datetime-local', req: 1, v: localNow(), attrs: `max="${localNow()}"` },
+    { n: 'companyId', l: 'Cafetería', t: 'select', blank: '—', opts: D.companies.map(c => [c.id, c.name]), v: v.companyId },
+    { n: 'contactId', l: 'Contacto', t: 'select', blank: '—', opts: D.contacts.map(k => [k.id, kName(k)]), v: v.contactId },
+    { n: 'oppId', l: 'Oportunidad relacionada', t: 'select', blank: '— Ninguna —', opts: D.opps.filter(x => x.status === 'Abierta' || x.id === v.oppId).map(x => [x.id, x.title + ' · ' + clientOf(x)]), v: v.oppId, full: 1, help: 'Indicá al menos una cafetería, contacto u oportunidad.' },
+    { n: 'description', l: 'Descripción', t: 'textarea', req: 1 },
+    { n: 'result', l: 'Resultado', t: 'textarea', req: 1, v: '' },
+  ], async d => { d.at = new Date(d.at).toISOString(); await api('POST', '/api/activities', d); toast('Actividad registrada.'); });
+}
+
+/* Historial comercial (consulta) */
+VIEWS.historial = () => {
+  setHead('Historial comercial', 'Reconstruí qué sucedió con una cafetería, un contacto o una oportunidad: actividades y cambios de etapa en orden cronológico.');
+  const st = UI.hist || (UI.hist = { kind: 'company', id: '' });
+  const src = { company: D.companies.map(c => [c.id, c.name]), contact: D.contacts.map(k => [k.id, kName(k)]), opp: D.opps.map(o => [o.id, o.title + ' · ' + clientOf(o)]) }[st.kind];
+  if (!src.some(([id]) => String(id) === String(st.id))) st.id = src.length ? src[0][0] : '';
+  const link = { company: 'empresas', contact: 'contactos', opp: 'oportunidades' }[st.kind];
+  return `<div class="toolbar wrap"><select onchange="UI.hist={kind:this.value,id:''};route()">${[['company', 'Cafetería'], ['contact', 'Contacto'], ['opp', 'Oportunidad']].map(([v, l]) => `<option value="${v}" ${st.kind === v ? 'selected' : ''}>${l}</option>`).join('')}</select>
+  <select style="min-width:320px" onchange="UI.hist.id=this.value;route()">${src.map(([v, l]) => `<option value="${v}" ${String(st.id) === String(v) ? 'selected' : ''}>${h(l)}</option>`).join('')}</select>${st.id ? `<button class="btn" onclick="go('${link}/${st.id}')">Ver detalle</button>` : ''}</div>
+  <div class="card">${st.id ? timeline(st.kind, st.id) : '<div class="empty">No hay registros para consultar.</div>'}</div>`;
+};
+
+/* Productos */
+VIEWS.productos = () => {
+  setHead('Productos y servicios', 'Catálogo de cafés y equipamiento ofrecido.' + (isMgr() ? '' : ' (Solo lectura para vendedores.)'));
+  return list('products', {
+    rows: D.products, search: p => [p.name, p.type, p.format].join(' '),
+    filters: [{ k: 'type', l: 'Tipo', opts: [...new Set(D.products.map(p => p.type))].map(t => [t, t]), get: p => p.type }, { k: 'active', l: 'Estado', opts: [['true', 'Activo'], ['false', 'Inactivo']], get: p => p.active }],
+    actions: isMgr() ? `<button class="btn primary" onclick="productForm()">+ Nuevo producto</button>` : '',
+    cols: [['Producto', p => `<b>${h(p.name)}</b>`], ['Tipo', p => h(p.type)], ['Presentación', p => h(p.format)], ['Precio por kg', p => (p.pricePerKg ? money(p.pricePerKg) : '—')], ['Oportunidades', p => D.opps.filter(o => o.productId === p.id).length], ['Estado', p => badge(p.active ? 'Activo' : 'Inactivo')]],
+    onRow: isMgr() ? p => `productForm(by('products',${p.id}))` : null,
+  });
+};
+function productForm(p) {
+  p = p || { active: true };
+  openForm(p.id ? 'Editar producto' : 'Nuevo producto', [{ n: 'name', l: 'Nombre', req: 1, v: p.name, full: 1 }, { n: 'type', l: 'Tipo', req: 1, v: p.type, attrs: 'placeholder="Café en grano, Especialidad, Equipamiento..."' },
+    { n: 'format', l: 'Presentación', v: p.format }, { n: 'pricePerKg', l: 'Precio por kg ($)', t: 'number', v: p.pricePerKg, attrs: 'min="0"' }, { n: 'active', l: 'Activo (disponible para nuevas oportunidades)', t: 'check', v: p.active }],
+  async d => { await api(p.id ? 'PUT' : 'POST', '/api/products' + (p.id ? '/' + p.id : ''), d); toast('Producto guardado.'); });
+}
+
+/* Usuarios (administrador) */
+VIEWS.usuarios = () => {
+  setHead('Gestión de usuarios', 'Altas, modificaciones, roles y habilitación. Las contraseñas se guardan cifradas (scrypt con sal).');
+  return `<div class="grid rolecards"><div class="card"><h3>Administrador</h3><p>Crea y modifica usuarios y roles, configura etapas, tipos de actividad, orígenes y motivos de pérdida. Accede a toda la información y puede asignar y reasignar.</p></div>
+  <div class="card"><h3>Responsable comercial</h3><p>Ve la información de todo el equipo, supervisa el embudo, asigna y reasigna oportunidades, gestiona productos y autoriza cambios sobre oportunidades cerradas.</p></div>
+  <div class="card"><h3>Vendedor</h3><p>Registra cafeterías y contactos, crea y actualiza sus oportunidades, cambia etapas, registra actividades y marca oportunidades como ganadas o perdidas. Solo ve su cartera.</p></div></div>
+  <div class="section">${list('users', {
+    rows: D.users, search: u => u.username + ' ' + u.name, filters: [{ k: 'role', l: 'Rol', opts: Object.entries(D.roles), get: u => u.role }, { k: 'active', l: 'Estado', opts: [['true', 'Habilitado'], ['false', 'Deshabilitado']], get: u => u.active }],
+    actions: `<button class="btn primary" onclick="userForm()">+ Nuevo usuario</button>`,
+    cols: [['Usuario', u => `<b>${h(u.username)}</b>`], ['Nombre', u => h(u.name)], ['Rol', u => h(D.roles[u.role])], ['Alcance', u => (u.role === 'vendedor' ? 'Solo su cartera' : 'Toda la información')], ['Estado', u => badge(u.active ? 'Habilitado' : 'Inactivo')]],
+    onRow: u => `userForm(by('users',${u.id}))`,
+  })}</div>`;
+};
+function userForm(u) {
+  const isNew = !u; u = u || { role: 'vendedor', active: true };
+  openForm(isNew ? 'Nuevo usuario' : 'Editar usuario', [
+    ...(isNew ? [{ n: 'username', l: 'Usuario (para iniciar sesión)', req: 1 }] : [{ t: 'note', html: `Usuario: <b>${h(u.username)}</b>` }]),
+    { n: 'name', l: 'Nombre y apellido', req: 1, v: u.name }, { n: 'role', l: 'Rol', t: 'select', req: 1, opts: Object.entries(D.roles), v: u.role },
+    { n: 'password', l: isNew ? 'Contraseña' : 'Nueva contraseña', t: 'password', req: isNew ? 1 : 0, help: isNew ? 'Mínimo 6 caracteres.' : 'Dejala vacía para no cambiarla.', attrs: 'autocomplete="new-password"' },
+    { n: 'active', l: 'Usuario habilitado', t: 'check', v: u.active },
+  ], async d => { await api(isNew ? 'POST' : 'PUT', '/api/users' + (isNew ? '' : '/' + u.id), d); toast('Usuario guardado.'); });
+}
+
+/* Configuración (administrador) */
+VIEWS.config = () => {
+  setHead('Configuración', 'Embudo comercial, tipos de actividad, orígenes y motivos de pérdida. Los registros no se borran: se deshabilitan para conservar el historial.');
+  const simple = (kind, title, extra = '') => `<div class="card"><div class="sectionhead"><h2>${title}</h2><button class="btn primary sm" onclick="cfgForm('${kind}')">+ Agregar</button></div>${extra}<table class="list"><tbody>${D[kind].map(x => `<tr class="click" onclick="cfgForm('${kind}',${x.id})"><td>${h(x.name)}${x.key === 'degustacion' ? ' <small class="muted">(habilita etapas ☕)</small>' : ''}</td><td style="text-align:right">${badge(x.active ? 'Activo' : 'Inactivo')}</td></tr>`).join('')}</tbody></table></div>`;
+  return `<div class="cfg"><div class="card"><div class="sectionhead"><h2>Etapas del embudo</h2><button class="btn primary sm" onclick="cfgForm('stages')">+ Nueva etapa</button></div>
+  <table class="list"><thead><tr><th>Orden</th><th>Etapa</th><th>Tipo</th><th>Probabilidad</th><th>Exige degustación</th><th>Oportunidades</th><th>Estado</th></tr></thead><tbody>${D.stages.map(s => `<tr class="click" onclick="cfgForm('stages',${s.id})"><td>${s.order}</td><td><b>${h(s.name)}</b></td><td>${TYPE_LBL[s.type]}</td><td>${s.prob}%</td><td>${s.requiresTasting ? 'Sí ☕' : 'No'}</td><td>${D.opps.filter(o => o.stageId === s.id).length}</td><td>${badge(s.active ? 'Activo' : 'Inactivo')}</td></tr>`).join('')}</tbody></table>
+  <p class="help">Reglas: debe existir al menos una etapa activa de cada tipo; las oportunidades abiertas solo pueden estar en etapas abiertas; las etapas de cierre exigen fecha y valor final (ganada) o motivo (perdida).</p></div>
+  ${simple('activityTypes', 'Tipos de actividad')}${simple('origins', 'Orígenes comerciales')}${simple('lossReasons', 'Motivos de pérdida')}</div>`;
+};
+function cfgForm(kind, id) {
+  const x = id ? by(kind, id) : { active: true, type: 'open', order: D.stages.length + 1, prob: 50 };
+  const label = { stages: 'etapa', activityTypes: 'tipo de actividad', origins: 'origen', lossReasons: 'motivo de pérdida' }[kind];
+  openForm((id ? 'Editar ' : 'Agregar ') + label, [{ n: 'name', l: 'Nombre', req: 1, v: x.name, full: 1 },
+    ...(kind === 'stages' ? [{ n: 'type', l: 'Tipo', t: 'select', req: 1, opts: Object.entries(TYPE_LBL), v: x.type }, { n: 'order', l: 'Orden en el embudo', t: 'number', req: 1, v: x.order, attrs: 'min="1"' },
+      { n: 'prob', l: 'Probabilidad por defecto (%)', t: 'number', v: x.prob, attrs: 'min="0" max="100"' }, { n: 'requiresTasting', l: 'Exige una degustación registrada para entrar en esta etapa', t: 'check', v: x.requiresTasting }] : []),
+    { n: 'active', l: 'Activo', t: 'check', v: x.active }],
+  async d => { await api(id ? 'PUT' : 'POST', `/api/config/${kind}` + (id ? '/' + id : ''), d); toast('Configuración guardada.'); });
+}
+
+/* ───────── Arranque ───────── */
+if (TOKEN) start().catch(() => logout(true));
 </script></body></html>
