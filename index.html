@@ -19,10 +19,15 @@
 .toast{position:fixed;right:20px;bottom:20px;background:#241a15;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);z-index:40;max-width:420px;font-size:14px;display:none}.toast.bad{background:#8c3434}.toast.show{display:block}
 .rolecards{grid-template-columns:repeat(3,1fr)}.rolecards p{font-size:13px;color:var(--muted);line-height:1.5;margin:6px 0 0}.cfg{display:grid;grid-template-columns:1fr 1fr;gap:16px}.cfg .card:first-child{grid-column:1/-1}
 .summary{font-size:13px;background:#faf8f6;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px;line-height:1.6}
+.ind-kpis{grid-template-columns:repeat(3,1fr)}.kpi .sub{font-size:12px;color:var(--muted)}.kpi strong.na{color:var(--muted)}
+.bars{display:flex;flex-direction:column;gap:10px;font-size:13px}.bars .it{display:grid;grid-template-columns:1fr auto;gap:4px 12px}.bars .lb{overflow-wrap:anywhere}.bars .tr{grid-column:1/-1;height:12px;background:#f1ebe5;border-radius:0 4px 4px 0;position:relative;cursor:default}.bars .tr i{position:absolute;left:0;top:0;bottom:0;background:#99582a;border-radius:0 4px 4px 0}.bars .tr:hover i{background:#6f4e37}.bars .vl{text-align:right;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}.bars .vl small{color:var(--muted)}
+.presets{display:flex;gap:6px;align-items:center}.toolbar label.inl{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}.toolbar label.inl input{min-width:0}.note{font-size:12px;color:var(--muted);margin:10px 2px 0}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+@media(max-width:980px){.ind-kpis{grid-template-columns:1fr 1fr}}
 @media(max-width:980px){.dl{grid-template-columns:1fr 1fr}.rolecards,.cfg{grid-template-columns:1fr}.cfg .card:first-child{grid-column:auto}}
 </style>
 </head><body>
-<div class="login" id="loginBox"><div class="lhero"><div class="bean">☕</div><h2>CoffeLink</h2><p>CRM para distribución de café a cafeterías: clientes, degustaciones, oportunidades e historial comercial.</p></div><div class="lform"><form id="loginForm" class="card" onsubmit="doLogin(event)"><h1>Iniciar sesión</h1><p class="sub">Ingresá con tu usuario para continuar.</p><label class="field"><span>Usuario</span><input id="lu" autocomplete="username" autofocus required></label><label class="field"><span>Contraseña</span><input id="lp" type="password" autocomplete="current-password" required></label><div class="lerr" id="lerr"></div><button class="btn primary" type="submit">Ingresar</button><div class="hint">Demo · usuarios: <b>admin</b> (Administrador), <b>comercial</b> (Responsable comercial), <b>vendedor</b> y <b>martin</b> (Vendedores)<br>Contraseña: <b>12345</b></div></form></div></div>
+<div class="login" id="loginBox"><div class="lhero"><div class="bean">☕</div><h2>CoffeLink</h2><p>CRM para distribución de café a cafeterías: clientes, degustaciones, oportunidades e historial comercial.</p></div><div class="lform"><form id="loginForm" class="card" onsubmit="doLogin(event)"><h1>Iniciar sesión</h1><p class="sub">Ingresá con tu usuario para continuar.</p><label class="field"><span>Usuario</span><input id="lu" autocomplete="username" autofocus required></label><label class="field"><span>Contraseña</span><input id="lp" type="password" autocomplete="current-password" required></label><div class="lerr" id="lerr"></div><button class="btn primary" type="submit">Ingresar</button></form></div></div>
 <div class="app">
 <aside class="side"><div class="brand"><div class="bean">☕</div><div><b>CoffeLink</b><small>CRM cafetero</small></div></div><nav class="nav" id="nav"></nav><div class="sidefoot">Sesión iniciada<br><b id="roleText"></b></div></aside>
 <main class="main"><header class="top"><div><h1 id="title"></h1><p id="subtitle"></p></div><div class="actions"><span class="who" id="userName"></span><button class="btn" onclick="logout()">Salir</button><button class="btn primary" onclick="oppForm()">+ Nueva oportunidad</button></div></header>
@@ -94,7 +99,7 @@ function logout(expired) {
 
 /* ───────── Navegación ───────── */
 const NAV = [['inicio', '⌂', 'Inicio'], ['empresas', '▣', 'Cafeterías'], ['contactos', '♙', 'Contactos'], ['oportunidades', '☰', 'Oportunidades'], ['embudo', '◫', 'Embudo'],
-  ['actividades', '✓', 'Actividades'], ['historial', '⟲', 'Historial comercial'], ['productos', '◇', 'Productos'], ['usuarios', '⚙', 'Usuarios', 1], ['config', '⚒', 'Configuración', 1]];
+  ['actividades', '✓', 'Actividades'], ['historial', '⟲', 'Historial comercial'], ['indicadores', '▤', 'Indicadores'], ['productos', '◇', 'Productos'], ['usuarios', '⚙', 'Usuarios', 1], ['config', '⚒', 'Configuración', 1]];
 function buildNav(cur) {
   $('nav').innerHTML = NAV.filter(n => !n[3] || isAdmin()).map(n => `<button class="${n[0] === cur ? 'active' : ''}" onclick="go('${n[0]}')">${n[1]} <span>${n[2]}</span></button>`).join('');
 }
@@ -446,6 +451,60 @@ VIEWS.historial = () => {
   <select style="min-width:320px" onchange="UI.hist.id=this.value;route()">${src.map(([v, l]) => `<option value="${v}" ${String(st.id) === String(v) ? 'selected' : ''}>${h(l)}</option>`).join('')}</select>${st.id ? `<button class="btn" onclick="go('${link}/${st.id}')">Ver detalle</button>` : ''}</div>
   <div class="card">${st.id ? timeline(st.kind, st.id) : '<div class="empty">No hay registros para consultar.</div>'}</div>`;
 };
+
+
+/* Indicadores (módulo de visualización) */
+const isoDay = d => { const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0, 10); };
+function indPreset(k) {
+  const now = new Date(), st = UI.ind;
+  if (k === 'mes') { st.from = isoDay(new Date(now.getFullYear(), now.getMonth(), 1)); st.to = isoDay(now); }
+  else if (k === '90') { const f = new Date(); f.setDate(f.getDate() - 90); st.from = isoDay(f); st.to = isoDay(now); }
+  else if (k === 'anio') { st.from = isoDay(new Date(now.getFullYear(), 0, 1)); st.to = isoDay(now); }
+  else { st.from = ''; st.to = ''; }
+  route();
+}
+VIEWS.indicadores = () => {
+  setHead('Indicadores', isMgr() ? 'Desempeño comercial del equipo: conversión, ventas, pipeline y motivos de pérdida.' : 'Tu desempeño comercial: conversión, ventas, pipeline y motivos de pérdida.');
+  if (!UI.ind) { const f = new Date(); f.setDate(f.getDate() - 90); UI.ind = { from: isoDay(f), to: isoDay(new Date()), owner: '' }; }
+  const st = UI.ind;
+  const qs = new URLSearchParams({ from: st.from, to: st.to, ownerId: st.owner }).toString();
+  api('GET', '/api/indicators?' + qs).then(renderIndicators).catch(err => { const el = $('indBody'); if (el) el.innerHTML = `<div class="card empty">${h(err.message)}</div>`; });
+  return `<div class="toolbar wrap">
+    <label class="inl">Desde <input type="date" value="${h(st.from)}" max="${todayStr()}" onchange="UI.ind.from=this.value;route()"></label>
+    <label class="inl">Hasta <input type="date" value="${h(st.to)}" max="${todayStr()}" onchange="UI.ind.to=this.value;route()"></label>
+    ${isMgr() ? `<select onchange="UI.ind.owner=this.value;route()"><option value="">Vendedor: todo el equipo</option>${sellers().map(([v, l]) => `<option value="${v}" ${String(st.owner) === String(v) ? 'selected' : ''}>${h(l)}</option>`).join('')}</select>` : ''}
+    <div class="presets"><button class="btn sm" onclick="indPreset('mes')">Este mes</button><button class="btn sm" onclick="indPreset('90')">Últimos 90 días</button><button class="btn sm" onclick="indPreset('anio')">Este año</button><button class="btn sm" onclick="indPreset('todo')">Todo</button></div>
+  </div><div id="indBody"><div class="card empty">Calculando indicadores…</div></div>`;
+};
+function bars(rows, val, fmt, sub, emptyMsg) {
+  if (!rows.length) return `<div class="empty">${emptyMsg}</div>`;
+  const max = Math.max(...rows.map(val), 0) || 1;
+  return `<div class="bars">${rows.map(x => `<div class="it"><span class="lb">${h(x.name)}</span><span class="vl">${fmt(val(x))}${sub ? ` <small>· ${h(sub(x))}</small>` : ''}</span><span class="tr" title="${h(x.name)}: ${h(fmt(val(x)))}${sub ? ' · ' + h(sub(x)) : ''}"><i style="width:${(val(x) / max) * 100}%"></i></span></div>`).join('')}</div>`;
+}
+function renderIndicators(r) {
+  const el = $('indBody'); if (!el || !location.hash.startsWith('#/indicadores')) return;
+  const k = r.kpis, pc = v => (v == null ? '—' : String(v).replace('.', ',') + ' %');
+  const per = r.period.from || r.period.to ? `del ${r.period.from ? fd(r.period.from) : 'inicio'} al ${r.period.to ? fd(r.period.to) : 'hoy'}` : 'todo el historial';
+  const kpi = (t, v, s, na) => `<div class="card kpi"><small>${t}</small><strong class="${na ? 'na' : ''}">${v}</strong><div class="sub">${s}</div></div>`;
+  el.innerHTML = `<div class="grid ind-kpis">
+    ${kpi('Tasa de conversión', pc(k.conversion), `${k.won} ganadas / ${k.won + k.lost} cerradas`, k.conversion == null)}
+    ${kpi('Ventas ganadas', money(k.wonValue), `${k.won} ${k.won === 1 ? 'oportunidad' : 'oportunidades'} · ${String(k.wonKg).replace('.', ',')} kg/mes`)}
+    ${kpi('Tiempo promedio de cierre', k.avgCloseDays == null ? '—' : k.avgCloseDays + ' días', 'desde el alta hasta ganarla', k.avgCloseDays == null)}
+    ${kpi('Pipeline abierto', money(k.openValue), `${k.openCount} ${k.openCount === 1 ? 'oportunidad' : 'oportunidades'} · ponderado ${money(k.weightedValue)}`)}
+    ${kpi('Oportunidades perdidas', k.lost, k.lost ? 'ver motivos abajo' : 'sin pérdidas en el período')}
+    ${kpi('Actividades registradas', k.activities, 'interacciones en el período')}
+  </div>
+  <p class="note">Período: ${per}. Conversión, ventas, pérdidas y actividades usan el período; el pipeline abierto es la situación actual. Ponderado = valor × probabilidad de cierre.</p>
+  <div class="section two">
+    <div class="card"><div class="sectionhead"><h2>Pipeline abierto por etapa</h2><button class="btn sm" onclick="go('embudo')">Ver tablero</button></div>${bars(r.pipeline, x => x.value, money, x => x.count + (x.count === 1 ? ' oportunidad' : ' oportunidades'), 'No hay oportunidades abiertas.')}</div>
+    <div class="card"><div class="sectionhead"><h2>Motivos de pérdida</h2></div>${bars(r.lossReasons, x => x.count, n => String(n), x => 'por ' + money(x.value), 'No hay oportunidades perdidas en el período.')}</div>
+  </div>
+  <div class="section two">
+    <div class="card"><div class="sectionhead"><h2>Ventas ganadas por producto</h2></div>${bars(r.byProduct, x => x.value, money, x => x.count + (x.count === 1 ? ' venta' : ' ventas') + ' · ' + String(x.kg).replace('.', ',') + ' kg/mes', 'No hay ventas ganadas en el período.')}</div>
+    <div class="card"><div class="sectionhead"><h2>Ventas ganadas por vendedor</h2></div>${bars(r.bySeller.filter(x => x.won), x => x.wonValue, money, x => x.won + (x.won === 1 ? ' venta' : ' ventas'), 'No hay ventas ganadas en el período.')}</div>
+  </div>
+  <div class="section card"><div class="sectionhead"><h2>${isMgr() ? 'Detalle por vendedor' : 'Tu detalle'}</h2></div><table class="list"><thead><tr><th>Vendedor</th><th class="num">Abiertas</th><th class="num">Valor abierto</th><th class="num">Ganadas</th><th class="num">Perdidas</th><th class="num">Conversión</th><th class="num">Valor ganado</th><th class="num">Actividades</th></tr></thead><tbody>${r.bySeller.map(x => `<tr><td><b>${h(x.name)}</b></td><td class="num">${x.open}</td><td class="num">${money(x.openValue)}</td><td class="num">${x.won}</td><td class="num">${x.lost}</td><td class="num">${pc(x.conversion)}</td><td class="num">${money(x.wonValue)}</td><td class="num">${x.activities}</td></tr>`).join('') || '<tr><td colspan="8" class="empty">Sin datos</td></tr>'}</tbody></table></div>`;
+}
 
 /* Productos */
 VIEWS.productos = () => {

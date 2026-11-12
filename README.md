@@ -59,9 +59,26 @@ El rubro no se limita a cambiar nombres; se refleja en el modelo de datos y en e
 8. Las altas y modificaciones registran quién y cuándo las hizo, con los campos que cambiaron.
 9. La configuración del embudo exige al menos una etapa activa de cada tipo. No permite deshabilitar una etapa que tenga oportunidades abiertas, ni cambiar el tipo de una etapa que esté en uso.
 
+## Módulo: visualización de indicadores
+
+Es una pantalla nueva, **Indicadores**, disponible para los tres roles. Los cálculos se hacen en el servidor (`GET /api/indicators`) y respetan los permisos: el vendedor ve solo sus números y, si pide los de otro, el servidor responde 403. El responsable comercial y el administrador ven todo el equipo y pueden filtrar por vendedor.
+
+| Indicador | Cálculo |
+|---|---|
+| Tasa de conversión | ganadas ÷ (ganadas + perdidas) cerradas en el período |
+| Ventas ganadas | suma del valor final y de los kg/mes de las ganadas en el período |
+| Tiempo promedio de cierre | días entre el alta y la fecha de cierre de las ganadas |
+| Pipeline abierto | valor estimado de las oportunidades abiertas, y su valor ponderado (valor × probabilidad) |
+| Pipeline por etapa | cantidad y valor de las oportunidades abiertas en cada etapa |
+| Motivos de pérdida | cantidad y valor de las perdidas, por motivo |
+| Ventas por producto y por vendedor | valor final ganado, y el detalle de cada vendedor |
+| Actividades | interacciones registradas en el período |
+
+Hay filtros por rango de fechas (con atajos: este mes, últimos 90 días, este año, todo) y por vendedor. El período se aplica a lo que se cerró o se registró en esas fechas. El pipeline abierto, en cambio, muestra siempre la situación actual.
+
 ## Pantallas
 
-Inicio de sesión · Pantalla principal · Gestión de usuarios · Listado, alta, edición y detalle de cafeterías · Listado, alta, edición y detalle de contactos · Productos · Listado, alta, edición y detalle de oportunidades · Tablero por etapa (arrastrar y soltar) · Registro de actividad · Historial comercial (por cafetería, contacto u oportunidad) · Configuración de etapas, tipos de actividad, orígenes y motivos de pérdida.
+Inicio de sesión · Pantalla principal · Gestión de usuarios · Listado, alta, edición y detalle de cafeterías · Listado, alta, edición y detalle de contactos · Productos · Listado, alta, edición y detalle de oportunidades · Tablero por etapa (arrastrar y soltar) · Registro de actividad · Historial comercial (por cafetería, contacto u oportunidad) · Configuración de etapas, tipos de actividad, orígenes y motivos de pérdida · Indicadores.
 
 Todos los listados tienen **búsqueda, filtros** (responsable, etapa, estado, origen y otros, según el listado) **y paginación**.
 

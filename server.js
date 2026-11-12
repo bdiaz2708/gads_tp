@@ -133,8 +133,10 @@ const isMgr = u => u.role === 'admin' || u.role === 'comercial';
 const isAdmin = u => u.role === 'admin';
 const requireRole = (u, ...roles) => { if (!roles.includes(u.role)) fail(403, 'No tenés permisos para esta operación.'); };
 
-const canSeeCompany = (u, c) => !!c && (isMgr(u) || c.ownerId === u.id);
-const canSeeContact = (u, k) => !!k && (isMgr(u) || k.ownerId === u.id || (k.companyId && canSeeCompany(u, find('companies', k.companyId))));
+// Un vendedor ve su cartera y, además, la cafetería/contacto de cualquier oportunidad que tenga asignada
+// (para poder continuar una gestión reasignada). Editar sigue reservado al responsable de cada registro.
+const canSeeCompany = (u, c) => !!c && (isMgr(u) || c.ownerId === u.id || db.opps.some(o => o.companyId === c.id && o.ownerId === u.id));
+const canSeeContact = (u, k) => !!k && (isMgr(u) || k.ownerId === u.id || (k.companyId && canSeeCompany(u, find('companies', k.companyId))) || db.opps.some(o => o.contactId === k.id && o.ownerId === u.id));
 const canSeeOpp = (u, o) => !!o && (isMgr(u) || o.ownerId === u.id);
 const canSeeActivity = (u, a) => isMgr(u) || a.userId === u.id ||
   (a.oppId && canSeeOpp(u, find('opps', a.oppId))) ||
@@ -440,6 +442,52 @@ route('POST', '/api/activities', (req, b, u) => {
   if (!d.companyId && !d.contactId && !d.oppId) fail(400, 'La actividad debe relacionarse con una cafetería, un contacto o una oportunidad.');
   const a = insert('activities', { ...d, userId: u.id, createdAt: nowIso() });
   return a;
+});
+
+/* ───────────────────────── Módulo: visualización de indicadores ───────────────────────── */
+// Los indicadores se calculan en el servidor sobre los datos que el rol puede ver.
+// Período: aplica a oportunidades cerradas (fecha real de cierre) y a actividades (fecha).
+// El pipeline abierto es una foto del momento: no depende del período.
+const pct = (a, b) => (b ? Math.round((a / b) * 1000) / 10 : null);
+const sum = (arr, f) => arr.reduce((t, x) => t + (Number(f(x)) || 0), 0);
+const dayDiff = (from, to) => Math.max(0, Math.round((new Date(to + 'T12:00:00') - new Date(String(from).slice(0, 10) + 'T12:00:00')) / 86400e3));
+
+route('GET', '/api/indicators', (req, b, u) => {
+  const q = new URL(req.url, 'http://x').searchParams;
+  const from = optDate(q.get('from'), 'La fecha desde') || '0000-01-01';
+  const to = optDate(q.get('to'), 'La fecha hasta') || '9999-12-31';
+  if (from > to) fail(400, 'La fecha "desde" no puede ser posterior a "hasta".');
+  let ownerId = q.get('ownerId') ? Number(q.get('ownerId')) : null;
+  if (!isMgr(u)) { if (ownerId && ownerId !== u.id) fail(403, 'Solo podés ver tus propios indicadores.'); ownerId = u.id; }
+
+  const opps = db.opps.filter(o => canSeeOpp(u, o) && (!ownerId || o.ownerId === ownerId));
+  const closed = opps.filter(o => o.status !== 'Abierta' && o.closeDate && o.closeDate >= from && o.closeDate <= to);
+  const won = closed.filter(o => o.status === 'Ganada'), lost = closed.filter(o => o.status === 'Perdida');
+  const open = opps.filter(o => o.status === 'Abierta');
+  const acts = db.activities.filter(a => canSeeActivity(u, a) && (!ownerId || a.userId === ownerId) && a.at.slice(0, 10) >= from && a.at.slice(0, 10) <= to);
+
+  const sellers = db.users.filter(x => x.role !== 'admin' && (!ownerId || x.id === ownerId) && (x.active || db.opps.some(o => o.ownerId === x.id)));
+  return {
+    period: { from: from === '0000-01-01' ? '' : from, to: to === '9999-12-31' ? '' : to, ownerId },
+    kpis: {
+      conversion: pct(won.length, closed.length), won: won.length, lost: lost.length,
+      wonValue: sum(won, o => o.finalValue), wonKg: sum(won, o => o.volumeKg),
+      avgCloseDays: won.length ? Math.round(sum(won, o => dayDiff(o.createdAt, o.closeDate)) / won.length) : null,
+      openCount: open.length, openValue: sum(open, o => o.value), weightedValue: Math.round(sum(open, o => (o.value || 0) * (o.prob || 0) / 100)),
+      activities: acts.length,
+    },
+    pipeline: sortedStages().filter(s => s.type === 'open' && (s.active || open.some(o => o.stageId === s.id)))
+      .map(s => { const os = open.filter(o => o.stageId === s.id); return { stageId: s.id, name: s.name, count: os.length, value: sum(os, o => o.value) }; }),
+    lossReasons: db.lossReasons.map(r => { const ls = lost.filter(o => o.lossReasonId === r.id); return { id: r.id, name: r.name, count: ls.length, value: sum(ls, o => o.value) }; })
+      .filter(r => r.count).sort((a, b) => b.count - a.count || b.value - a.value),
+    bySeller: sellers.map(s => {
+      const so = opps.filter(o => o.ownerId === s.id), sc = closed.filter(o => o.ownerId === s.id), sw = sc.filter(o => o.status === 'Ganada'), sop = so.filter(o => o.status === 'Abierta');
+      return { userId: s.id, name: s.name, open: sop.length, openValue: sum(sop, o => o.value), won: sw.length, lost: sc.length - sw.length,
+        wonValue: sum(sw, o => o.finalValue), conversion: pct(sw.length, sc.length), activities: acts.filter(a => a.userId === s.id).length };
+    }).sort((a, b) => b.wonValue - a.wonValue || b.openValue - a.openValue),
+    byProduct: db.products.map(p => { const pw = won.filter(o => o.productId === p.id); return { id: p.id, name: p.name, count: pw.length, value: sum(pw, o => o.finalValue), kg: sum(pw, o => o.volumeKg) }; })
+      .filter(p => p.count).sort((a, b) => b.value - a.value),
+  };
 });
 
 /* ───────────────────────── Servidor HTTP ───────────────────────── */
